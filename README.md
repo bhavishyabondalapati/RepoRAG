@@ -87,6 +87,8 @@ flowchart LR
 
 The eval set has **32 hand-written questions** over two well-known repos, each pinned to a commit: [`pallets/itsdangerous`](https://github.com/pallets/itsdangerous) (Python) and [`sindresorhus/ky`](https://github.com/sindresorhus/ky) (TypeScript). 28 questions have hand-labelled gold evidence (file + line range), and 4 are deliberately unanswerable. See [`eval/datasets/`](eval/datasets).
 
+A separate **held-out set of 20 questions** (18 answerable, 2 unanswerable) lives in [`eval/datasets/heldout/`](eval/datasets/heldout). It covers parts of the same repos that the first 32 never ask about, and it was written *before* any retrieval tuning. The 32 questions are the development set: I studied their failures, so future changes may be tuned against them. Held-out numbers are only for reporting (`python eval/run_eval.py --split heldout`).
+
 - **Recall@5:** fraction of gold evidence spans that appear in the top 5 retrieved chunks
 - **MRR@10:** mean of 1 / rank of the first relevant chunk
 - **Faithfulness:** an LLM judge splits each answer into claims and checks each against the retrieved context
@@ -254,7 +256,10 @@ Tests use small fake embedders, rerankers and LLMs (`backend/tests/fakes.py`), s
 │   ├── datasets/
 │   │   ├── repos.json            Eval repos and the exact commits they are pinned to
 │   │   ├── itsdangerous.jsonl    16 questions with gold file/line evidence (Python repo)
-│   │   └── ky.jsonl              16 questions with gold file/line evidence (TypeScript repo)
+│   │   ├── ky.jsonl              16 questions with gold file/line evidence (TypeScript repo)
+│   │   └── heldout/
+│   │       ├── itsdangerous.jsonl  10 held-out questions, written before any tuning
+│   │       └── ky.jsonl            10 held-out questions, written before any tuning
 │   ├── metrics.py                Recall@k, MRR, LLM-judge prompt and score parsing
 │   ├── run_eval.py               Runs all four retrieval modes and writes the results table
 │   ├── test_metrics.py           Unit tests for the metrics

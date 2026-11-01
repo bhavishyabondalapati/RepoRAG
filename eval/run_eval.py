@@ -3,6 +3,11 @@
 Usage (from the repo root):
     python eval/run_eval.py              # retrieval metrics + LLM faithfulness
     python eval/run_eval.py --no-llm     # retrieval metrics only (no API key needed)
+    python eval/run_eval.py --split heldout   # score the held-out test questions
+
+Splits:
+    dev       the original 32 questions; free to study and tune against
+    heldout   20 questions written before any tuning; only for reporting
 
 Reports, per mode (bm25 / dense / hybrid / hybrid_rerank):
     recall@5      fraction of gold evidence spans found in the top 5 chunks
@@ -104,7 +109,8 @@ def evaluate(args) -> dict:
         retriever = Retriever(
             index, embedder, reranker, settings.candidates_per_retriever, settings.rerank_top_n
         )
-        questions = [json.loads(line) for line in (DATASETS / spec["questions"]).open()]
+        question_file = spec["questions"] if args.split == "dev" else spec["heldout_questions"]
+        questions = [json.loads(line) for line in (DATASETS / question_file).open()]
         for q in questions:
             gold = [Span(g["path"], g["start"], g["end"]) for g in q["gold"]]
             for mode in MODES:
@@ -238,8 +244,13 @@ def main() -> None:
         description=__doc__, formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("--no-llm", action="store_true", help="skip generation + faithfulness")
-    parser.add_argument("--out", type=Path, default=ROOT / "eval" / "results")
+    parser.add_argument("--split", choices=["dev", "heldout"], default="dev")
+    parser.add_argument("--out", type=Path, help="default: eval/results (dev) or .../heldout")
     args = parser.parse_args()
+    if args.out is None:
+        args.out = ROOT / "eval" / "results"
+        if args.split == "heldout":
+            args.out /= "heldout"
 
     result = evaluate(args)
     args.out.mkdir(parents=True, exist_ok=True)

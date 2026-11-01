@@ -3,12 +3,14 @@
     "url": "https://github.com/pallets/itsdangerous",
     "commit": "672971d66a2ef9f85151e53283113f33d642dabd",
     "language": "Python",
-    "questions": "itsdangerous.jsonl"
+    "questions": "itsdangerous.jsonl",
+    "heldout_questions": "heldout/itsdangerous.jsonl"
   },
   "ky": {
     "url": "https://github.com/sindresorhus/ky",
     "commit": "3541888878c4d303a8bc2ad61815f4e048f55a5d",
     "language": "TypeScript",
-    "questions": "ky.jsonl"
+    "questions": "ky.jsonl",
+    "heldout_questions": "heldout/ky.jsonl"
   }
 }
