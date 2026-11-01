@@ -1,0 +1,4 @@
+# One-shot install for local development: backend runtime + dev tools + the
+# backend package itself (so `import reporag` works from eval/ and tests).
+-r backend/requirements-dev.txt
+-e ./backend
