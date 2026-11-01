@@ -112,7 +112,7 @@ Per repository (Recall@5 / MRR@10):
 | Hybrid (RRF) | 0.964 / 0.723 | 0.214 / 0.169 |
 | Hybrid + rerank | 0.893 / 0.621 | 0.286 / 0.149 |
 
-> **TODO:** Faithfulness, answer rate and abstention need a Gemini API key. They will be filled in from a real run of `python eval/run_eval.py`. No numbers here are estimated.
+> **TODO:** Faithfulness, answer rate and abstention are not measured yet. The Gemini free tier allows 20 requests per day per model, and the LLM part of the eval needs about 100 (answers plus judge calls, production mode only). They will be filled in from a real run of `python eval/run_eval.py --llm-modes hybrid_rerank --rpm 4`, which caches responses and can resume across days. No numbers here are estimated.
 
 **What the numbers say:**
 
