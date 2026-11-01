@@ -63,14 +63,21 @@ MODE_LABELS = {
 class CachedLLM:
     """Wraps an LLM with an on-disk cache so re-running the eval doesn't re-bill calls."""
 
-    def __init__(self, llm, path: Path):
+    def __init__(self, llm, path: Path, rpm: float | None = None):
         self.llm, self.path, self.name = llm, path, llm.name
         self.cache = json.loads(path.read_text()) if path.exists() else {}
         self.model = getattr(llm, "model", "unknown")
+        # Free-tier keys allow only a few requests per minute; pace calls to stay under it.
+        self.min_interval = 60.0 / rpm if rpm else 0.0
+        self._last_call = 0.0
 
     def generate(self, prompt: str, system: str | None = None, temperature: float = 0.0) -> str:
         key = hashlib.sha256(f"{self.model}\n{system}\n{prompt}".encode()).hexdigest()
         if key not in self.cache:
+            wait = self._last_call + self.min_interval - time.monotonic()
+            if wait > 0:
+                time.sleep(wait)
+            self._last_call = time.monotonic()
             self.cache[key] = self.llm.generate(prompt, system=system, temperature=temperature)
             self.path.write_text(json.dumps(self.cache))
         return self.cache[key]
@@ -99,7 +106,7 @@ def evaluate(args) -> dict:
     llm = None
     if not args.no_llm:
         base = get_llm("gemini", api_key=settings.gemini_api_key, model=settings.gemini_model)
-        llm = CachedLLM(base, Path(settings.data_dir) / "llm_cache.json")
+        llm = CachedLLM(base, Path(settings.data_dir) / "llm_cache.json", rpm=args.rpm)
 
     specs = json.loads((DATASETS / "repos.json").read_text())
     per_question: list[dict] = []
@@ -123,11 +130,14 @@ def evaluate(args) -> dict:
                 if gold:
                     row["recall@5"] = recall_at_k(ranked, gold, k=5)
                     row["rr@10"] = reciprocal_rank(ranked, gold, k=10)
-                if llm is not None:
+                if llm is not None and mode in args.llm_modes:
                     row.update(judge_answer(q, retriever, llm, mode, settings))
                 per_question.append(row)
-            print(f"  {q['id']} done")
-    return summarize(per_question, settings, llm, device)
+            print(f"  {q['id']} done", flush=True)
+    result = summarize(per_question, settings, llm, device)
+    result["config"]["llm_modes"] = list(args.llm_modes) if llm is not None else []
+    result["split"] = args.split
+    return result
 
 
 def judge_answer(q: dict, retriever: Retriever, llm, mode: str, settings) -> dict:
@@ -162,11 +172,14 @@ def summarize(rows: list[dict], settings, llm, device: str) -> dict:
             "mrr@10": mean([r["rr@10"] for r in answerable]),
             "retrieval_ms": mean([r["retrieval_ms"] for r in mode_rows]),
         }
-        if llm is not None:
-            faith = [r["faithfulness"] for r in answerable if r.get("faithfulness") is not None]
+        judged = [r for r in answerable if "refused" in r]
+        if llm is not None and judged:
+            faith = [r["faithfulness"] for r in judged if r.get("faithfulness") is not None]
             entry["faithfulness"] = mean(faith)
-            entry["answer_rate"] = mean([0.0 if r["refused"] else 1.0 for r in answerable])
-            entry["abstention"] = mean([1.0 if r["refused"] else 0.0 for r in unanswerable])
+            entry["answer_rate"] = mean([0.0 if r["refused"] else 1.0 for r in judged])
+            entry["abstention"] = mean(
+                [1.0 if r["refused"] else 0.0 for r in unanswerable if "refused" in r]
+            )
         summary[mode] = entry
 
     by_repo: dict[str, dict] = {}
@@ -214,11 +227,18 @@ def to_markdown(result: dict) -> str:
         "| Retrieval latency |",
         "|---|---|---|---|---|---|---|",
     ]
+    llm_modes = cfg.get("llm_modes") or []
     for mode, s in result["summary"].items():
+        if llm_modes and mode not in llm_modes:
+            llm_cells = "— | — | —"  # generation deliberately not run for this mode
+        else:
+            llm_cells = (
+                f"{fmt(s.get('faithfulness'))} | {fmt(s.get('answer_rate'), pct=True)} | "
+                f"{fmt(s.get('abstention'), pct=True)}"
+            )
         lines.append(
             f"| {MODE_LABELS[mode]} | {fmt(s['recall@5'])} | {fmt(s['mrr@10'])} | "
-            f"{fmt(s.get('faithfulness'))} | {fmt(s.get('answer_rate'), pct=True)} | "
-            f"{fmt(s.get('abstention'), pct=True)} | {s['retrieval_ms']:.0f} ms |"
+            f"{llm_cells} | {s['retrieval_ms']:.0f} ms |"
         )
 
     repos = list(result["by_repo"])
@@ -245,6 +265,14 @@ def main() -> None:
     )
     parser.add_argument("--no-llm", action="store_true", help="skip generation + faithfulness")
     parser.add_argument("--split", choices=["dev", "heldout"], default="dev")
+    parser.add_argument(
+        "--llm-modes",
+        nargs="+",
+        choices=MODES,
+        default=list(MODES),
+        help="retrieval modes to run generation + faithfulness for (default: all)",
+    )
+    parser.add_argument("--rpm", type=float, help="max uncached LLM calls per minute")
     parser.add_argument("--out", type=Path, help="default: eval/results (dev) or .../heldout")
     args = parser.parse_args()
     if args.out is None:
