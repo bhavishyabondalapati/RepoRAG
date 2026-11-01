@@ -43,9 +43,9 @@ class Retriever:
     def _dense(self, query: str, k: int) -> list[tuple[int, float]]:
         return self.index.dense.search(self.embedder.encode_query(query), k)
 
-    def retrieve(self, query: str, mode: Mode = "hybrid_rerank", top_k: int = 6) -> list[
-        RetrievedChunk
-    ]:
+    def retrieve(
+        self, query: str, mode: Mode = "hybrid_rerank", top_k: int = 6
+    ) -> list[RetrievedChunk]:
         chunks = self.index.chunks
         if mode == "bm25":
             hits = self._bm25(query, top_k)

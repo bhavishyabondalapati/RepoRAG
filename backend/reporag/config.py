@@ -50,9 +50,26 @@ SPECIAL_FILENAMES = {"Dockerfile": "dockerfile", "Makefile": "make", "README": "
 
 # Directories that never contain useful source (vendored deps, build output, VCS data).
 SKIP_DIRS = {
-    ".git", "node_modules", "vendor", "dist", "build", "out", ".next", "__pycache__",
-    ".venv", "venv", "env", ".tox", ".mypy_cache", ".pytest_cache", "coverage",
-    "target", ".idea", ".vscode", "site-packages", "bower_components",
+    ".git",
+    "node_modules",
+    "vendor",
+    "dist",
+    "build",
+    "out",
+    ".next",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "env",
+    ".tox",
+    ".mypy_cache",
+    ".pytest_cache",
+    "coverage",
+    "target",
+    ".idea",
+    ".vscode",
+    "site-packages",
+    "bower_components",
 }
 # Lockfiles and minified bundles are large and add noise to retrieval.
 SKIP_FILE_SUFFIXES = (".min.js", ".min.css", ".map", ".lock")

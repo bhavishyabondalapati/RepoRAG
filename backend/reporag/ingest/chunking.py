@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import asdict, dataclass
-from functools import lru_cache
+from functools import cache
 
 MAX_CHUNK_LINES = 120  # definitions longer than this are split further
 WINDOW_LINES = 60
@@ -52,7 +52,7 @@ class Chunk:
 TREE_SITTER_LANGUAGES = {"python", "javascript", "typescript", "tsx"}
 
 
-@lru_cache(maxsize=None)
+@cache
 def _parser(language: str):
     from tree_sitter import Language, Parser
 
@@ -94,9 +94,7 @@ def _unwrap(node):
     """Look through wrappers (decorators, `export`) to the real definition node."""
     inner = node
     while inner.type in {"decorated_definition", "export_statement"}:
-        target = inner.child_by_field_name("definition") or inner.child_by_field_name(
-            "declaration"
-        )
+        target = inner.child_by_field_name("definition") or inner.child_by_field_name("declaration")
         if target is None:
             break
         inner = target
@@ -252,9 +250,7 @@ def chunk_code(path: str, language: str, source: str) -> list[Chunk]:
     def flush_pending(until_row: int) -> None:
         nonlocal pending_start
         if pending_start is not None and pending_start <= until_row:
-            chunks.extend(
-                _sized(path, language, lines, pending_start, until_row, "module", None)
-            )
+            chunks.extend(_sized(path, language, lines, pending_start, until_row, "module", None))
         pending_start = None
 
     nodes = tree.root_node.children

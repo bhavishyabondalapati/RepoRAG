@@ -16,8 +16,7 @@ class LLMError(RuntimeError):
 class LLMProvider(Protocol):
     name: str
 
-    def generate(self, prompt: str, system: str | None = None, temperature: float = 0.0) -> str:
-        ...
+    def generate(self, prompt: str, system: str | None = None, temperature: float = 0.0) -> str: ...
 
 
 def get_llm(provider: str = "gemini", **kwargs) -> LLMProvider:
