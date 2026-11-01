@@ -1,0 +1,80 @@
+:root {
+  --paper: #f5f3ee;
+  --surface: #fbfaf7;
+  --ink: #1c1b19;
+  --ink-2: #5c5a55;
+  --ink-3: #8a877f;
+  --rule: #dcd8cf;
+  --rule-strong: #c4bfb3;
+  --accent: #b4441c;
+  --accent-wash: #f3e3da;
+  --ok: #2f6b3a;
+  --code-bg: #efece5;
+  --hl: #f6e7b8;
+  --radius: 6px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141413;
+    --surface: #1b1a18;
+    --ink: #ecebe6;
+    --ink-2: #a19f98;
+    --ink-3: #74716b;
+    --rule: #2e2c29;
+    --rule-strong: #403d39;
+    --accent: #e0754a;
+    --accent-wash: #3a2219;
+    --ok: #7fbf8a;
+    --code-bg: #201f1c;
+    --hl: #3b3320;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+code,
+pre,
+kbd,
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-wash);
+}
