@@ -92,22 +92,24 @@ def test_server_retry_hint_overrides_short_backoff():
     assert result == "ok" and sleeps == [41.0]
 
 
-def test_server_retry_hint_is_capped():
-    sleeps = []
+def test_long_server_retry_hint_fails_fast():
+    # e.g. a daily quota that resets in hours: waiting a minute can't help.
+    sleeps, calls = [], []
 
-    def always():
+    def quota_exhausted():
+        calls.append(1)
         raise Transient()
 
     with pytest.raises(Transient):
         retry_with_backoff(
-            always,
+            quota_exhausted,
             lambda e: True,
-            max_attempts=2,
+            max_attempts=5,
             sleep=sleeps.append,
-            retry_after=lambda e: 600.0,
+            retry_after=lambda e: 10866.0,
             max_wait=90.0,
         )
-    assert sleeps == [90.0]
+    assert sleeps == [] and len(calls) == 1
 
 
 def test_gemini_reads_retry_delay_from_429():

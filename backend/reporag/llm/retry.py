@@ -40,8 +40,9 @@ def retry_with_backoff(
     """Call `fn`, retrying transient failures. Non-retryable errors raise immediately.
 
     If `retry_after` returns a server-suggested wait (e.g. from a 429 response),
-    we wait at least that long (up to `max_wait`), since retrying sooner is
-    guaranteed to hit the same rate limit.
+    we wait at least that long, since retrying sooner is guaranteed to hit the
+    same rate limit. If the server asks for more than `max_wait` (e.g. a daily
+    quota resetting in hours), retrying can't help, so we fail immediately.
     """
     delays = backoff_delays(max_attempts, base, cap)
     for attempt in range(1, max_attempts + 1):
@@ -53,7 +54,9 @@ def retry_with_backoff(
             delay = delays[attempt - 1]
             hint = retry_after(exc) if retry_after else None
             if hint is not None:
-                delay = min(max_wait, max(delay, hint))
+                if hint > max_wait:
+                    raise
+                delay = max(delay, hint)
             log.warning("Attempt %d failed (%s); retrying in %.1fs", attempt, exc, delay)
             sleep(delay)
     raise AssertionError("unreachable")
