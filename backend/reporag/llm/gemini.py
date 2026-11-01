@@ -19,6 +19,22 @@ def _is_retryable(exc: Exception) -> bool:
     return isinstance(exc, httpx.TransportError | TimeoutError | ConnectionError)
 
 
+def _retry_after(exc: Exception) -> float | None:
+    """Read the server's suggested wait from a 429's RetryInfo detail, e.g. "41s"."""
+    from google.genai import errors
+
+    if not isinstance(exc, errors.APIError) or not isinstance(exc.details, dict):
+        return None
+    for detail in exc.details.get("error", {}).get("details", []) or []:
+        delay = detail.get("retryDelay") if isinstance(detail, dict) else None
+        if isinstance(delay, str) and delay.endswith("s"):
+            try:
+                return float(delay[:-1])
+            except ValueError:
+                return None
+    return None
+
+
 class GeminiProvider:
     name = "gemini"
 
@@ -43,6 +59,8 @@ class GeminiProvider:
             return response.text or ""
 
         try:
-            return retry_with_backoff(call, _is_retryable, max_attempts=self.max_attempts)
+            return retry_with_backoff(
+                call, _is_retryable, max_attempts=self.max_attempts, retry_after=_retry_after
+            )
         except errors.APIError as exc:
             raise LLMError(f"Gemini request failed ({exc.code}): {exc.message}") from exc

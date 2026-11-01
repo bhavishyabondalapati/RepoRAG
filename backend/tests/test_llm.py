@@ -1,7 +1,7 @@
 import pytest
 
 from reporag.llm.base import LLMError, get_llm
-from reporag.llm.gemini import _is_retryable
+from reporag.llm.gemini import _is_retryable, _retry_after
 from reporag.llm.retry import backoff_delays, retry_with_backoff
 
 
@@ -75,3 +75,54 @@ def test_gemini_requires_api_key():
 def test_unknown_provider():
     with pytest.raises(LLMError):
         get_llm("nope")
+
+
+def test_server_retry_hint_overrides_short_backoff():
+    sleeps, calls = [], []
+
+    def rate_limited():
+        calls.append(1)
+        if len(calls) < 2:
+            raise Transient()
+        return "ok"
+
+    result = retry_with_backoff(
+        rate_limited, lambda e: True, base=1, sleep=sleeps.append, retry_after=lambda e: 41.0
+    )
+    assert result == "ok" and sleeps == [41.0]
+
+
+def test_server_retry_hint_is_capped():
+    sleeps = []
+
+    def always():
+        raise Transient()
+
+    with pytest.raises(Transient):
+        retry_with_backoff(
+            always,
+            lambda e: True,
+            max_attempts=2,
+            sleep=sleeps.append,
+            retry_after=lambda e: 600.0,
+            max_wait=90.0,
+        )
+    assert sleeps == [90.0]
+
+
+def test_gemini_reads_retry_delay_from_429():
+    from google.genai import errors
+
+    body = {
+        "error": {
+            "code": 429,
+            "message": "quota",
+            "details": [
+                {"@type": "type.googleapis.com/google.rpc.Help"},
+                {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "41s"},
+            ],
+        }
+    }
+    assert _retry_after(errors.APIError(429, body)) == 41.0
+    assert _retry_after(errors.APIError(503, {"error": {"message": "busy"}})) is None
+    assert _retry_after(ValueError("x")) is None

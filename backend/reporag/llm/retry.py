@@ -34,8 +34,15 @@ def retry_with_backoff(
     base: float = 1.0,
     cap: float = 30.0,
     sleep: Callable[[float], None] = time.sleep,
+    retry_after: Callable[[Exception], float | None] | None = None,
+    max_wait: float = 90.0,
 ) -> T:
-    """Call `fn`, retrying transient failures. Non-retryable errors raise immediately."""
+    """Call `fn`, retrying transient failures. Non-retryable errors raise immediately.
+
+    If `retry_after` returns a server-suggested wait (e.g. from a 429 response),
+    we wait at least that long (up to `max_wait`), since retrying sooner is
+    guaranteed to hit the same rate limit.
+    """
     delays = backoff_delays(max_attempts, base, cap)
     for attempt in range(1, max_attempts + 1):
         try:
@@ -44,6 +51,9 @@ def retry_with_backoff(
             if attempt == max_attempts or not is_retryable(exc):
                 raise
             delay = delays[attempt - 1]
+            hint = retry_after(exc) if retry_after else None
+            if hint is not None:
+                delay = min(max_wait, max(delay, hint))
             log.warning("Attempt %d failed (%s); retrying in %.1fs", attempt, exc, delay)
             sleep(delay)
     raise AssertionError("unreachable")
