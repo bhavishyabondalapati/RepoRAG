@@ -82,7 +82,7 @@ class Settings(BaseSettings):
     )
 
     gemini_api_key: str | None = None
-    gemini_model: str = "gemini-3.6-flash"
+    gemini_model: str = "gemini-3.8-flash"
     github_token: str | None = None
 
     data_dir: Path = Field(default=Path("./data"), alias="REPORAG_DATA_DIR")

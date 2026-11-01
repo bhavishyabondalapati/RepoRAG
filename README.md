@@ -177,7 +177,7 @@ Results are written to `eval/results/results.md` and `eval/results/results.json`
 | Variable | Default | Purpose |
 |---|---|---|
 | `GEMINI_API_KEY` | none | Required to answer questions and for the faithfulness eval |
-| `GEMINI_MODEL` | `gemini-3.6-flash` | Gemini model id |
+| `GEMINI_MODEL` | `gemini-3.8-flash` | Gemini model id |
 | `GITHUB_TOKEN` | none | Optional; raises the GitHub API rate limit for repo-size checks |
 | `REPORAG_DATA_DIR` | `./data` | Where clones and indexes are stored |
 | `REPORAG_MAX_REPO_MB` | `50` | Reject repositories larger than this |
