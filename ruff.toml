@@ -1,0 +1,11 @@
+line-length = 100
+target-version = "py311"
+src = ["backend", "eval"]
+extend-exclude = ["frontend", "eval/.cache"]
+
+[lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["B008"]  # FastAPI's Depends() in defaults is idiomatic
+
+[lint.isort]
+known-first-party = ["reporag", "tests", "metrics"]
