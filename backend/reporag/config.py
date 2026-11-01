@@ -101,7 +101,8 @@ class Settings(BaseSettings):
     # Cross-encoder logit below which we treat retrieval as "nothing relevant found".
     min_rerank_score: float = -6.0
 
-    cors_origins: str = "http://localhost:3000"
+    # Extra allowed origins (comma-separated); localhost on any port is always allowed.
+    cors_origins: str = ""
 
     @property
     def repos_dir(self) -> Path:

@@ -58,7 +58,9 @@ def get_llm_provider() -> LLMProvider:
 app = FastAPI(title="RepoRAG", version="0.1.0", description=__doc__)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[o.strip() for o in get_settings().cors_origins.split(",")],
+    allow_origins=[o.strip() for o in get_settings().cors_origins.split(",") if o.strip()],
+    # Any localhost port, so the dev server works even when 3000 is taken.
+    allow_origin_regex=r"^http://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
