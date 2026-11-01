@@ -29,7 +29,11 @@ class SentenceTransformerEmbedder:
         from sentence_transformers import SentenceTransformer
 
         self.model = SentenceTransformer(model_name, device=device)
-        self.dim = self.model.get_sentence_embedding_dimension()
+        # Renamed in newer sentence-transformers releases; support both.
+        get_dim = getattr(self.model, "get_embedding_dimension", None) or (
+            self.model.get_sentence_embedding_dimension
+        )
+        self.dim = get_dim()
         self._query_prefix = BGE_QUERY_PREFIX if "bge" in model_name.lower() else ""
 
     def encode_documents(self, texts: list[str]) -> np.ndarray:
