@@ -11,6 +11,10 @@ import numpy as np
 # bge models are trained with this instruction prefix for queries (not documents).
 BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
+# One model call at a time: the indexing thread and request threads share the
+# same model, and GPU backends (MPS in particular) are not safe to drive concurrently.
+INFERENCE_LOCK = threading.Lock()
+
 
 class Embedder(Protocol):
     dim: int
@@ -29,15 +33,17 @@ class SentenceTransformerEmbedder:
         self._query_prefix = BGE_QUERY_PREFIX if "bge" in model_name.lower() else ""
 
     def encode_documents(self, texts: list[str]) -> np.ndarray:
-        vectors = self.model.encode(
-            texts, batch_size=32, normalize_embeddings=True, show_progress_bar=False
-        )
+        with INFERENCE_LOCK:
+            vectors = self.model.encode(
+                texts, batch_size=32, normalize_embeddings=True, show_progress_bar=False
+            )
         return np.asarray(vectors, dtype="float32")
 
     def encode_query(self, text: str) -> np.ndarray:
-        vector = self.model.encode(
-            [self._query_prefix + text], normalize_embeddings=True, show_progress_bar=False
-        )
+        with INFERENCE_LOCK:
+            vector = self.model.encode(
+                [self._query_prefix + text], normalize_embeddings=True, show_progress_bar=False
+            )
         return np.asarray(vector, dtype="float32")
 
 

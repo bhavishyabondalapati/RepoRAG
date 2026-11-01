@@ -17,11 +17,14 @@ class CrossEncoderReranker:
         self.model = CrossEncoder(model_name, device=device, max_length=512)
 
     def score(self, query: str, documents: list[str]) -> list[float]:
+        from reporag.retrieval.dense import INFERENCE_LOCK
+
         if not documents:
             return []
-        scores = self.model.predict(
-            [(query, d) for d in documents], batch_size=32, show_progress_bar=False
-        )
+        with INFERENCE_LOCK:
+            scores = self.model.predict(
+                [(query, d) for d in documents], batch_size=32, show_progress_bar=False
+            )
         return [float(s) for s in scores]
 
 
