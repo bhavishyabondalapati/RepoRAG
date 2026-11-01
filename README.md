@@ -112,6 +112,17 @@ Per repository (Recall@5 / MRR@10):
 | Hybrid (RRF) | 0.964 / 0.723 | 0.214 / 0.169 |
 | Hybrid + rerank | 0.893 / 0.621 | 0.286 / 0.149 |
 
+**Held-out baseline (before any retrieval tuning).** These are the 20 held-out questions, scored retrieval-only on the current pipeline (`python eval/run_eval.py --split heldout --no-llm`, run 2026-11-01). Future retrieval changes will be compared against these numbers.
+
+| Retrieval mode | Recall@5 | MRR@10 | itsdangerous (R@5 / MRR) | ky (R@5 / MRR) |
+|---|---|---|---|---|
+| BM25 only | 0.722 | 0.687 | 1.000 / 0.911 | 0.444 / 0.463 |
+| Dense only | 0.667 | 0.631 | 1.000 / 0.917 | 0.333 / 0.344 |
+| Hybrid (RRF) | 0.722 | 0.667 | 1.000 / 0.944 | 0.444 / 0.389 |
+| Hybrid + rerank | 0.667 | 0.639 | 1.000 / 0.944 | 0.333 / 0.333 |
+
+The pattern matches the dev set: itsdangerous is easy for every mode, ky is hard, and the reranker doesn't help on ky.
+
 > **TODO:** Faithfulness, answer rate and abstention are not measured yet. The Gemini free tier allows 20 requests per day per model, and the LLM part of the eval needs about 100 (answers plus judge calls, production mode only). They will be filled in from a real run of `python eval/run_eval.py --llm-modes hybrid_rerank --rpm 4`, which caches responses and can resume across days. No numbers here are estimated.
 
 **What the numbers say:**
@@ -265,7 +276,10 @@ Tests use small fake embedders, rerankers and LLMs (`backend/tests/fakes.py`), s
 │   ├── test_metrics.py           Unit tests for the metrics
 │   └── results/
 │       ├── results.md            Latest results table (copied into this README)
-│       └── results.json          Full results including per-question top-5 chunks
+│       ├── results.json          Full results including per-question top-5 chunks
+│       └── heldout/
+│           ├── results.md        Held-out baseline table (retrieval only, before tuning)
+│           └── results.json      Full held-out baseline results
 └── frontend/
     ├── Dockerfile                Multi-stage build to a small standalone Next.js server
     ├── .dockerignore             Keeps node_modules and build output out of the image
