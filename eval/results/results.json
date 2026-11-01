@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T00:46:13+00:00",
+  "generated_at": "2026-11-01T00:53:57+00:00",
   "config": {
     "embedding_model": "BAAI/bge-small-en-v1.5",
     "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
@@ -13,22 +13,60 @@
     "bm25": {
       "recall@5": 0.5892857142857143,
       "mrr@10": 0.4861111111111111,
-      "retrieval_ms": 0.5010169406887144
+      "retrieval_ms": 0.5269649409456179
     },
     "dense": {
       "recall@5": 0.5178571428571429,
       "mrr@10": 0.3351190476190476,
-      "retrieval_ms": 17.807697964599356
+      "retrieval_ms": 19.767725345445797
     },
     "hybrid": {
       "recall@5": 0.5892857142857143,
       "mrr@10": 0.4458333333333333,
-      "retrieval_ms": 7.411983155179769
+      "retrieval_ms": 7.9239648330258206
     },
     "hybrid_rerank": {
       "recall@5": 0.5892857142857143,
       "mrr@10": 0.38511904761904764,
-      "retrieval_ms": 106.02120582188945
+      "retrieval_ms": 116.98336846893653
+    }
+  },
+  "by_repo": {
+    "itsdangerous": {
+      "bm25": {
+        "recall@5": 0.8214285714285714,
+        "mrr@10": 0.7222222222222222
+      },
+      "dense": {
+        "recall@5": 0.8214285714285714,
+        "mrr@10": 0.5416666666666666
+      },
+      "hybrid": {
+        "recall@5": 0.9642857142857143,
+        "mrr@10": 0.7226190476190476
+      },
+      "hybrid_rerank": {
+        "recall@5": 0.8928571428571429,
+        "mrr@10": 0.6214285714285713
+      }
+    },
+    "ky": {
+      "bm25": {
+        "recall@5": 0.35714285714285715,
+        "mrr@10": 0.25
+      },
+      "dense": {
+        "recall@5": 0.21428571428571427,
+        "mrr@10": 0.1285714285714286
+      },
+      "hybrid": {
+        "recall@5": 0.21428571428571427,
+        "mrr@10": 0.16904761904761906
+      },
+      "hybrid_rerank": {
+        "recall@5": 0.2857142857142857,
+        "mrr@10": 0.1488095238095238
+      }
     }
   },
   "per_question": [
@@ -37,7 +75,7 @@
       "id": "itsd-01",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.23900019004940987,
+      "retrieval_ms": 0.23529119789600372,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "docs/concepts.rst:101-154",
@@ -53,7 +91,7 @@
       "id": "itsd-01",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 339.19970924034715,
+      "retrieval_ms": 339.01512529700994,
       "top5": [
         "src/itsdangerous/signer.py:48-64",
         "src/itsdangerous/signer.py:76-128",
@@ -69,7 +107,7 @@
       "id": "itsd-01",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 12.391624972224236,
+      "retrieval_ms": 10.968208778649569,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "src/itsdangerous/signer.py:48-64",
@@ -85,7 +123,7 @@
       "id": "itsd-01",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 171.99287516996264,
+      "retrieval_ms": 507.16499984264374,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "src/itsdangerous/signer.py:48-64",
@@ -101,7 +139,7 @@
       "id": "itsd-02",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.2448330633342266,
+      "retrieval_ms": 0.31179189682006836,
       "top5": [
         "src/itsdangerous/signer.py:181-213",
         "src/itsdangerous/signer.py:129-173",
@@ -117,7 +155,7 @@
       "id": "itsd-02",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.797583170235157,
+      "retrieval_ms": 29.16341694071889,
       "top5": [
         "src/itsdangerous/signer.py:181-213",
         "src/itsdangerous/signer.py:76-128",
@@ -133,7 +171,7 @@
       "id": "itsd-02",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.097083307802677,
+      "retrieval_ms": 6.998000200837851,
       "top5": [
         "src/itsdangerous/signer.py:181-213",
         "src/itsdangerous/signer.py:129-173",
@@ -149,7 +187,7 @@
       "id": "itsd-02",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.79550000652671,
+      "retrieval_ms": 102.48745838180184,
       "top5": [
         "src/itsdangerous/signer.py:181-213",
         "src/itsdangerous/signer.py:76-128",
@@ -165,7 +203,7 @@
       "id": "itsd-03",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.1737498678267002,
+      "retrieval_ms": 0.20750006660819054,
       "top5": [
         "src/itsdangerous/signer.py:226-242",
         "docs/concepts.rst:101-154",
@@ -181,7 +219,7 @@
       "id": "itsd-03",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.175125181674957,
+      "retrieval_ms": 8.856457658112049,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "src/itsdangerous/signer.py:129-173",
@@ -197,7 +235,7 @@
       "id": "itsd-03",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.012167014181614,
+      "retrieval_ms": 10.06645755842328,
       "top5": [
         "src/itsdangerous/signer.py:226-242",
         "src/itsdangerous/signer.py:76-128",
@@ -213,7 +251,7 @@
       "id": "itsd-03",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.55333285406232,
+      "retrieval_ms": 103.92266698181629,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "src/itsdangerous/signer.py:226-242",
@@ -229,7 +267,7 @@
       "id": "itsd-04",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.1305839978158474,
+      "retrieval_ms": 0.12241723015904427,
       "top5": [
         "src/itsdangerous/signer.py:129-173",
         "src/itsdangerous/signer.py:76-128",
@@ -245,7 +283,7 @@
       "id": "itsd-04",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.430708967149258,
+      "retrieval_ms": 7.486667018383741,
       "top5": [
         "src/itsdangerous/url_safe.py:72-76",
         "src/itsdangerous/url_safe.py:79-83",
@@ -261,7 +299,7 @@
       "id": "itsd-04",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.328124716877937,
+      "retrieval_ms": 6.186000071465969,
       "top5": [
         "docs/url_safe.rst:1-21",
         "tests/test_itsdangerous/test_signer.py:18-102",
@@ -277,7 +315,7 @@
       "id": "itsd-04",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.59437484294176,
+      "retrieval_ms": 101.37849999591708,
       "top5": [
         "tests/test_itsdangerous/test_signer.py:18-102",
         "src/itsdangerous/signer.py:76-128",
@@ -293,7 +331,7 @@
       "id": "itsd-05",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.1882081851363182,
+      "retrieval_ms": 0.16837520524859428,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "docs/timed.rst:1-28",
@@ -309,7 +347,7 @@
       "id": "itsd-05",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.940125349909067,
+      "retrieval_ms": 6.574207916855812,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "docs/timed.rst:1-28",
@@ -325,7 +363,7 @@
       "id": "itsd-05",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.257375098764896,
+      "retrieval_ms": 6.705583073198795,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "docs/timed.rst:1-28",
@@ -341,7 +379,7 @@
       "id": "itsd-05",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.30849995464087,
+      "retrieval_ms": 102.92250011116266,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "docs/timed.rst:1-28",
@@ -357,7 +395,7 @@
       "id": "itsd-06",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.18133316189050674,
+      "retrieval_ms": 0.17295870929956436,
       "top5": [
         "docs/timed.rst:1-28",
         "src/itsdangerous/timed.py:22-28",
@@ -373,7 +411,7 @@
       "id": "itsd-06",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.242499850690365,
+      "retrieval_ms": 7.151334080845118,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "src/itsdangerous/timed.py:44-51",
@@ -389,7 +427,7 @@
       "id": "itsd-06",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.191750057041645,
+      "retrieval_ms": 6.979166995733976,
       "top5": [
         "src/itsdangerous/timed.py:22-28",
         "src/itsdangerous/timed.py:44-51",
@@ -405,7 +443,7 @@
       "id": "itsd-06",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.94208396226168,
+      "retrieval_ms": 102.23462479189038,
       "top5": [
         "docs/timed.rst:1-28",
         "src/itsdangerous/timed.py:159-167",
@@ -421,7 +459,7 @@
       "id": "itsd-07",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.2310420386493206,
+      "retrieval_ms": 0.21316716447472572,
       "top5": [
         "src/itsdangerous/exc.py:60-63",
         "src/itsdangerous/timed.py:170-228",
@@ -437,7 +475,7 @@
       "id": "itsd-07",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 9.656208101660013,
+      "retrieval_ms": 44.59887510165572,
       "top5": [
         "src/itsdangerous/exc.py:60-63",
         "src/itsdangerous/timed.py:170-228",
@@ -453,7 +491,7 @@
       "id": "itsd-07",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 5.974375177174807,
+      "retrieval_ms": 8.213916793465614,
       "top5": [
         "src/itsdangerous/exc.py:60-63",
         "src/itsdangerous/timed.py:170-228",
@@ -469,7 +507,7 @@
       "id": "itsd-07",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.09595940634608,
+      "retrieval_ms": 103.12320804223418,
       "top5": [
         "src/itsdangerous/exc.py:60-63",
         "src/itsdangerous/timed.py:170-228",
@@ -485,7 +523,7 @@
       "id": "itsd-08",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.18200045451521873,
+      "retrieval_ms": 0.18354179337620735,
       "top5": [
         "src/itsdangerous/url_safe.py:15-69",
         "src/itsdangerous/__init__.py:1-17",
@@ -501,7 +539,7 @@
       "id": "itsd-08",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.619791034609079,
+      "retrieval_ms": 7.076750043779612,
       "top5": [
         "src/itsdangerous/url_safe.py:15-69",
         "docs/serializer.rst:51-110",
@@ -517,7 +555,7 @@
       "id": "itsd-08",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.63074990734458,
+      "retrieval_ms": 7.460750173777342,
       "top5": [
         "src/itsdangerous/url_safe.py:15-69",
         "src/itsdangerous/url_safe.py:72-76",
@@ -533,7 +571,7 @@
       "id": "itsd-08",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.3859580270946,
+      "retrieval_ms": 101.57895926386118,
       "top5": [
         "src/itsdangerous/url_safe.py:15-69",
         "docs/serializer.rst:51-110",
@@ -549,7 +587,7 @@
       "id": "itsd-09",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.19795820116996765,
+      "retrieval_ms": 0.1954999752342701,
       "top5": [
         "src/itsdangerous/encoding.py:28-38",
         "tests/test_itsdangerous/test_encoding.py:25-27",
@@ -565,7 +603,7 @@
       "id": "itsd-09",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.230207625776529,
+      "retrieval_ms": 7.013209164142609,
       "top5": [
         "src/itsdangerous/encoding.py:28-38",
         "src/itsdangerous/encoding.py:20-25",
@@ -581,7 +619,7 @@
       "id": "itsd-09",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.599667016416788,
+      "retrieval_ms": 6.707083899527788,
       "top5": [
         "src/itsdangerous/encoding.py:28-38",
         "tests/test_itsdangerous/test_encoding.py:25-27",
@@ -597,7 +635,7 @@
       "id": "itsd-09",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.32108395919204,
+      "retrieval_ms": 101.7423328012228,
       "top5": [
         "src/itsdangerous/encoding.py:28-38",
         "src/itsdangerous/url_safe.py:15-69",
@@ -613,7 +651,7 @@
       "id": "itsd-10",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.12858398258686066,
+      "retrieval_ms": 0.12025004252791405,
       "top5": [
         "src/itsdangerous/timed.py:29-33",
         "CHANGES.rst:101-160",
@@ -629,7 +667,7 @@
       "id": "itsd-10",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.081374991685152,
+      "retrieval_ms": 6.740250159054995,
       "top5": [
         "src/itsdangerous/timed.py:34-43",
         "src/itsdangerous/timed.py:29-33",
@@ -645,7 +683,7 @@
       "id": "itsd-10",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.498250178992748,
+      "retrieval_ms": 6.979833822697401,
       "top5": [
         "src/itsdangerous/timed.py:29-33",
         "docs/timed.rst:1-28",
@@ -661,7 +699,7 @@
       "id": "itsd-10",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 100.75749969109893,
+      "retrieval_ms": 101.57591570168734,
       "top5": [
         "src/itsdangerous/timed.py:44-51",
         "src/itsdangerous/timed.py:71-158",
@@ -677,7 +715,7 @@
       "id": "itsd-11",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.14316709712147713,
+      "retrieval_ms": 0.15395879745483398,
       "top5": [
         "src/itsdangerous/serializer.py:348-365",
         "src/itsdangerous/serializer.py:396-404",
@@ -693,7 +731,7 @@
       "id": "itsd-11",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.108124904334545,
+      "retrieval_ms": 6.965042091906071,
       "top5": [
         "src/itsdangerous/serializer.py:396-404",
         "src/itsdangerous/serializer.py:366-395",
@@ -709,7 +747,7 @@
       "id": "itsd-11",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.026749964803457,
+      "retrieval_ms": 7.032624911516905,
       "top5": [
         "src/itsdangerous/serializer.py:396-404",
         "src/itsdangerous/serializer.py:348-365",
@@ -725,7 +763,7 @@
       "id": "itsd-11",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.52549995109439,
+      "retrieval_ms": 102.82587492838502,
       "top5": [
         "src/itsdangerous/serializer.py:348-365",
         "src/itsdangerous/serializer.py:396-404",
@@ -741,7 +779,7 @@
       "id": "itsd-12",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.17641671001911163,
+      "retrieval_ms": 0.18625007942318916,
       "top5": [
         "src/itsdangerous/serializer.py:327-343",
         "src/itsdangerous/serializer.py:40-106",
@@ -757,7 +795,7 @@
       "id": "itsd-12",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.526458077132702,
+      "retrieval_ms": 7.783124689012766,
       "top5": [
         "docs/serializer.rst:51-110",
         "src/itsdangerous/serializer.py:327-343",
@@ -773,7 +811,7 @@
       "id": "itsd-12",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.061708088964224,
+      "retrieval_ms": 7.52741564065218,
       "top5": [
         "src/itsdangerous/serializer.py:327-343",
         "docs/serializer.rst:51-110",
@@ -789,7 +827,7 @@
       "id": "itsd-12",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.6292503811419,
+      "retrieval_ms": 104.07158406451344,
       "top5": [
         "src/itsdangerous/serializer.py:40-106",
         "src/itsdangerous/serializer.py:327-343",
@@ -805,7 +843,7 @@
       "id": "itsd-13",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.11170795187354088,
+      "retrieval_ms": 0.14316709712147713,
       "top5": [
         "src/itsdangerous/serializer.py:277-285",
         "src/itsdangerous/signer.py:76-128",
@@ -821,7 +859,7 @@
       "id": "itsd-13",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.436957977712154,
+      "retrieval_ms": 7.701625116169453,
       "top5": [
         "src/itsdangerous/serializer.py:40-106",
         "src/itsdangerous/serializer.py:308-320",
@@ -837,7 +875,7 @@
       "id": "itsd-13",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.734791211783886,
+      "retrieval_ms": 7.745707873255014,
       "top5": [
         "src/itsdangerous/serializer.py:40-106",
         "src/itsdangerous/serializer.py:277-285",
@@ -853,7 +891,7 @@
       "id": "itsd-13",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.25004190579057,
+      "retrieval_ms": 104.00645900517702,
       "top5": [
         "src/itsdangerous/serializer.py:277-285",
         "src/itsdangerous/serializer.py:40-106",
@@ -869,7 +907,7 @@
       "id": "itsd-14",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.20524999126791954,
+      "retrieval_ms": 0.23391703143715858,
       "top5": [
         "src/itsdangerous/signer.py:129-173",
         "src/itsdangerous/signer.py:76-128",
@@ -885,7 +923,7 @@
       "id": "itsd-14",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.546708755195141,
+      "retrieval_ms": 7.65629205852747,
       "top5": [
         "docs/concepts.rst:101-154",
         "src/itsdangerous/signer.py:174-180",
@@ -901,7 +939,7 @@
       "id": "itsd-14",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.939374841749668,
+      "retrieval_ms": 7.213333155959845,
       "top5": [
         "docs/concepts.rst:101-154",
         "src/itsdangerous/signer.py:129-173",
@@ -917,7 +955,7 @@
       "id": "itsd-14",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.43816703930497,
+      "retrieval_ms": 104.22429163008928,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "docs/concepts.rst:101-154",
@@ -933,7 +971,7 @@
       "id": "itsd-15",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 0.14983303844928741,
+      "retrieval_ms": 0.14733383432030678,
       "top5": [
         "docs/index.rst:1-60",
         "docs/concepts.rst:1-60",
@@ -947,7 +985,7 @@
       "id": "itsd-15",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 6.988917011767626,
+      "retrieval_ms": 7.238833233714104,
       "top5": [
         "README.md:3-15",
         "README.md:16-34",
@@ -961,7 +999,7 @@
       "id": "itsd-15",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 6.557959131896496,
+      "retrieval_ms": 6.57424982637167,
       "top5": [
         "docs/index.rst:1-60",
         "docs/concepts.rst:1-60",
@@ -975,7 +1013,7 @@
       "id": "itsd-15",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 102.59112482890487,
+      "retrieval_ms": 102.77358302846551,
       "top5": [
         "docs/index.rst:1-60",
         "README.md:16-34",
@@ -989,7 +1027,7 @@
       "id": "itsd-16",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 0.1692911610007286,
+      "retrieval_ms": 0.17637526616454124,
       "top5": [
         "README.md:16-34",
         "docs/index.rst:1-60",
@@ -1003,7 +1041,7 @@
       "id": "itsd-16",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 7.170707918703556,
+      "retrieval_ms": 7.084584329277277,
       "top5": [
         "README.md:16-34",
         "tests/test_itsdangerous/test_encoding.py:1-8",
@@ -1017,7 +1055,7 @@
       "id": "itsd-16",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 6.763375364243984,
+      "retrieval_ms": 7.283499930053949,
       "top5": [
         "README.md:16-34",
         "tests/test_itsdangerous/test_encoding.py:1-8",
@@ -1031,7 +1069,7 @@
       "id": "itsd-16",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 101.55854187905788,
+      "retrieval_ms": 102.76266606524587,
       "top5": [
         "README.md:16-34",
         "docs/index.rst:1-60",
@@ -1045,7 +1083,7 @@
       "id": "ky-01",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.5210000090301037,
+      "retrieval_ms": 0.6626248359680176,
       "top5": [
         "source/types/retry.ts:121-180",
         "readme.md:310-369",
@@ -1061,7 +1099,7 @@
       "id": "ky-01",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.918457966297865,
+      "retrieval_ms": 8.072375319898129,
       "top5": [
         "readme.md:310-369",
         "readme.md:1148-1155",
@@ -1077,7 +1115,7 @@
       "id": "ky-01",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.857292123138905,
+      "retrieval_ms": 8.29541590064764,
       "top5": [
         "readme.md:310-369",
         "source/types/retry.ts:121-180",
@@ -1093,7 +1131,7 @@
       "id": "ky-01",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 107.7756667509675,
+      "retrieval_ms": 105.62937520444393,
       "top5": [
         "source/types/retry.ts:121-180",
         "test/hooks.ts:3912-3971",
@@ -1109,7 +1147,7 @@
       "id": "ky-02",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.9296252392232418,
+      "retrieval_ms": 0.9620841592550278,
       "top5": [
         "source/types/retry.ts:21-80",
         "source/utils/normalize.ts:25-35",
@@ -1125,7 +1163,7 @@
       "id": "ky-02",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.144249975681305,
+      "retrieval_ms": 7.688750047236681,
       "top5": [
         "source/types/retry.ts:121-180",
         "source/types/retry.ts:21-80",
@@ -1141,7 +1179,7 @@
       "id": "ky-02",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.564708590507507,
+      "retrieval_ms": 7.745417300611734,
       "top5": [
         "source/types/retry.ts:21-80",
         "source/types/retry.ts:121-180",
@@ -1157,7 +1195,7 @@
       "id": "ky-02",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 108.63179201260209,
+      "retrieval_ms": 104.92349974811077,
       "top5": [
         "source/types/retry.ts:21-80",
         "source/types/retry.ts:121-180",
@@ -1173,7 +1211,7 @@
       "id": "ky-03",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.6634583696722984,
+      "retrieval_ms": 0.5430411547422409,
       "top5": [
         "test/retry.ts:2485-2544",
         "source/types/retry.ts:71-130",
@@ -1189,7 +1227,7 @@
       "id": "ky-03",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.3357499204576015,
+      "retrieval_ms": 7.194957695901394,
       "top5": [
         "source/types/retry.ts:71-130",
         "test/retry.ts:2434-2483",
@@ -1205,7 +1243,7 @@
       "id": "ky-03",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.56349989771843,
+      "retrieval_ms": 7.5622498989105225,
       "top5": [
         "source/types/retry.ts:71-130",
         "test/retry.ts:2485-2544",
@@ -1221,7 +1259,7 @@
       "id": "ky-03",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 107.17008402571082,
+      "retrieval_ms": 104.29758299142122,
       "top5": [
         "test/retry.ts:2485-2544",
         "source/types/retry.ts:71-130",
@@ -1237,7 +1275,7 @@
       "id": "ky-04",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.1688750237226486,
+      "retrieval_ms": 1.3449997641146183,
       "top5": [
         "readme.md:1854-1873",
         "test/response-size.ts:438-497",
@@ -1253,7 +1291,7 @@
       "id": "ky-04",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.613958325237036,
+      "retrieval_ms": 8.313207887113094,
       "top5": [
         "source/types/retry.ts:121-180",
         "readme.md:1830-1853",
@@ -1269,7 +1307,7 @@
       "id": "ky-04",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.942833937704563,
+      "retrieval_ms": 9.345041122287512,
       "top5": [
         "readme.md:1854-1873",
         "source/types/options.ts:195-254",
@@ -1285,7 +1323,7 @@
       "id": "ky-04",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 106.88075004145503,
+      "retrieval_ms": 105.68000003695488,
       "top5": [
         "source/types/retry.ts:121-180",
         "readme.md:1854-1873",
@@ -1301,7 +1339,7 @@
       "id": "ky-05",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.9191669523715973,
+      "retrieval_ms": 0.9527918882668018,
       "top5": [
         "source/utils/timeout.ts:10-46",
         "source/errors/TimeoutError.ts:4-15",
@@ -1317,7 +1355,7 @@
       "id": "ky-05",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.737834006547928,
+      "retrieval_ms": 7.383500225841999,
       "top5": [
         "readme.md:1201-1213",
         "readme.md:360-403",
@@ -1333,7 +1371,7 @@
       "id": "ky-05",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.517167065292597,
+      "retrieval_ms": 8.151166141033173,
       "top5": [
         "source/core/Ky.ts:1124-1216",
         "source/types/retry.ts:121-180",
@@ -1349,7 +1387,7 @@
       "id": "ky-05",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.14045909419656,
+      "retrieval_ms": 104.64016674086452,
       "top5": [
         "source/types/retry.ts:121-180",
         "source/types/retry.ts:71-130",
@@ -1365,7 +1403,7 @@
       "id": "ky-06",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.1905836872756481,
+      "retrieval_ms": 1.422292087227106,
       "top5": [
         "readme.md:260-319",
         "source/types/retry.ts:21-80",
@@ -1381,7 +1419,7 @@
       "id": "ky-06",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.608874700963497,
+      "retrieval_ms": 7.043791003525257,
       "top5": [
         "test/retry.ts:1348-1407",
         "test/retry-decisions.ts:166-188",
@@ -1397,7 +1435,7 @@
       "id": "ky-06",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.286250289529562,
+      "retrieval_ms": 8.849916979670525,
       "top5": [
         "test/retry.ts:372-431",
         "source/types/retry.ts:21-80",
@@ -1413,7 +1451,7 @@
       "id": "ky-06",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.93295779451728,
+      "retrieval_ms": 105.94879137352109,
       "top5": [
         "source/types/retry.ts:21-80",
         "test/retry-decisions.ts:166-188",
@@ -1429,7 +1467,7 @@
       "id": "ky-07",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.5354578606784344,
+      "retrieval_ms": 0.5817501805722713,
       "top5": [
         "test/stream.ts:217-276",
         "test/retry.ts:3166-3225",
@@ -1445,7 +1483,7 @@
       "id": "ky-07",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.699166890233755,
+      "retrieval_ms": 7.14570889249444,
       "top5": [
         "test/retry.ts:2895-2954",
         "test/browser.ts:761-820",
@@ -1461,7 +1499,7 @@
       "id": "ky-07",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.13937496766448,
+      "retrieval_ms": 7.407041732221842,
       "top5": [
         "test/retry.ts:2609-2668",
         "test/retry.ts:2895-2954",
@@ -1477,7 +1515,7 @@
       "id": "ky-07",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.21720799058676,
+      "retrieval_ms": 102.88654174655676,
       "top5": [
         "test/retry.ts:2609-2668",
         "test/retry.ts:2895-2954",
@@ -1493,7 +1531,7 @@
       "id": "ky-08",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.47620758414268494,
+      "retrieval_ms": 0.5079582333564758,
       "top5": [
         "test/browser.ts:761-820",
         "source/utils/timeout.ts:10-46",
@@ -1509,7 +1547,7 @@
       "id": "ky-08",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.256082724779844,
+      "retrieval_ms": 7.70645821467042,
       "top5": [
         "test/browser.ts:761-820",
         "test/validation.ts:6-65",
@@ -1525,7 +1563,7 @@
       "id": "ky-08",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.1641248650848866,
+      "retrieval_ms": 7.595582865178585,
       "top5": [
         "test/browser.ts:761-820",
         "source/utils/timeout.ts:10-46",
@@ -1541,7 +1579,7 @@
       "id": "ky-08",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.16316613554955,
+      "retrieval_ms": 105.8577080257237,
       "top5": [
         "source/utils/timeout.ts:10-46",
         "test/browser.ts:761-820",
@@ -1557,7 +1595,7 @@
       "id": "ky-09",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.0747499763965607,
+      "retrieval_ms": 0.9205411188304424,
       "top5": [
         "source/errors/NetworkError.ts:4-19",
         "test/errors.ts:201-260",
@@ -1573,7 +1611,7 @@
       "id": "ky-09",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.879834156483412,
+      "retrieval_ms": 7.304458878934383,
       "top5": [
         "source/errors/NetworkError.ts:4-19",
         "readme.md:1411-1432",
@@ -1589,7 +1627,7 @@
       "id": "ky-09",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.528875023126602,
+      "retrieval_ms": 8.066666778177023,
       "top5": [
         "source/errors/NetworkError.ts:4-19",
         "readme.md:1411-1432",
@@ -1605,7 +1643,7 @@
       "id": "ky-09",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.55574980005622,
+      "retrieval_ms": 105.0864583812654,
       "top5": [
         "source/errors/NetworkError.ts:4-19",
         "readme.md:1411-1432",
@@ -1621,7 +1659,7 @@
       "id": "ky-10",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.9170840494334698,
+      "retrieval_ms": 0.8548330515623093,
       "top5": [
         "test/validation.ts:56-115",
         "readme.md:1008-1097",
@@ -1637,7 +1675,7 @@
       "id": "ky-10",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.975334137678146,
+      "retrieval_ms": 7.183624897152185,
       "top5": [
         "source/utils/merge.ts:31-61",
         "readme.md:1008-1097",
@@ -1653,7 +1691,7 @@
       "id": "ky-10",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.422082755714655,
+      "retrieval_ms": 7.955790963023901,
       "top5": [
         "readme.md:1008-1097",
         "test/merge.ts:314-373",
@@ -1669,7 +1707,7 @@
       "id": "ky-10",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 107.04533429816365,
+      "retrieval_ms": 106.28170892596245,
       "top5": [
         "test/fetch.ts:897-932",
         "readme.md:1008-1097",
@@ -1685,7 +1723,7 @@
       "id": "ky-11",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.051332801580429,
+      "retrieval_ms": 1.000874675810337,
       "top5": [
         "source/utils/merge.ts:73-86",
         "source/utils/merge.ts:186-196",
@@ -1701,7 +1739,7 @@
       "id": "ky-11",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 10.43008267879486,
+      "retrieval_ms": 8.369333110749722,
       "top5": [
         "source/utils/merge.ts:186-196",
         "source/utils/merge.ts:73-86",
@@ -1717,7 +1755,7 @@
       "id": "ky-11",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.344000205397606,
+      "retrieval_ms": 8.933667093515396,
       "top5": [
         "source/utils/merge.ts:73-86",
         "source/utils/merge.ts:186-196",
@@ -1733,7 +1771,7 @@
       "id": "ky-11",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 105.09279230609536,
+      "retrieval_ms": 107.74087533354759,
       "top5": [
         "source/utils/merge.ts:186-196",
         "source/utils/merge.ts:169-184",
@@ -1749,7 +1787,7 @@
       "id": "ky-12",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.7046251557767391,
+      "retrieval_ms": 0.7829591631889343,
       "top5": [
         "test/errors.ts:151-210",
         "test/fetch.ts:934-979",
@@ -1765,7 +1803,7 @@
       "id": "ky-12",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.505292072892189,
+      "retrieval_ms": 8.095459081232548,
       "top5": [
         "source/errors/HTTPError.ts:6-34",
         "test/http-error.ts:68-127",
@@ -1781,7 +1819,7 @@
       "id": "ky-12",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.524917203933001,
+      "retrieval_ms": 8.632542099803686,
       "top5": [
         "test/http-error.ts:68-127",
         "test/http-error.ts:394-453",
@@ -1797,7 +1835,7 @@
       "id": "ky-12",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.16879085823894,
+      "retrieval_ms": 104.97995791956782,
       "top5": [
         "test/http-error.ts:68-127",
         "test/errors.ts:151-210",
@@ -1813,7 +1851,7 @@
       "id": "ky-13",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.8164159953594208,
+      "retrieval_ms": 0.9565418586134911,
       "top5": [
         "readme.md:1120-1147",
         "source/core/Ky.ts:197-199",
@@ -1829,7 +1867,7 @@
       "id": "ky-13",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.067375350743532,
+      "retrieval_ms": 8.966625202447176,
       "top5": [
         "source/types/hooks.ts:312-371",
         "readme.md:559-663",
@@ -1845,7 +1883,7 @@
       "id": "ky-13",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.891499739140272,
+      "retrieval_ms": 9.163584094494581,
       "top5": [
         "readme.md:1120-1147",
         "readme.md:559-663",
@@ -1861,7 +1899,7 @@
       "id": "ky-13",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 104.50504114851356,
+      "retrieval_ms": 109.14783412590623,
       "top5": [
         "readme.md:1120-1147",
         "readme.md:559-663",
@@ -1877,7 +1915,7 @@
       "id": "ky-14",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.7159579545259476,
+      "retrieval_ms": 0.711541622877121,
       "top5": [
         "readme.md:1945-1948",
         "test/helpers/with-performance.ts:11-14",
@@ -1893,7 +1931,7 @@
       "id": "ky-14",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.99999975040555,
+      "retrieval_ms": 8.245999924838543,
       "top5": [
         "source/types/ky.ts:5-64",
         "source/types/ky.ts:105-164",
@@ -1909,7 +1947,7 @@
       "id": "ky-14",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.012625224888325,
+      "retrieval_ms": 7.637124974280596,
       "top5": [
         "readme.md:1-20",
         "readme.md:1738-1750",
@@ -1925,7 +1963,7 @@
       "id": "ky-14",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.28183306753635,
+      "retrieval_ms": 107.9879580065608,
       "top5": [
         "readme.md:1610-1647",
         "readme.md:1580-1609",
@@ -1941,7 +1979,7 @@
       "id": "ky-15",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 0.6856252439320087,
+      "retrieval_ms": 0.7379581220448017,
       "top5": [
         "test/retry.ts:3892-3908",
         "readme.md:1411-1432",
@@ -1955,7 +1993,7 @@
       "id": "ky-15",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 6.8789999932050705,
+      "retrieval_ms": 7.657249923795462,
       "top5": [
         "readme.md:1-20",
         "readme.md:1816-1829",
@@ -1969,7 +2007,7 @@
       "id": "ky-15",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 7.204708177596331,
+      "retrieval_ms": 8.70704185217619,
       "top5": [
         "readme.md:1-20",
         "source/types/options.ts:95-154",
@@ -1983,7 +2021,7 @@
       "id": "ky-15",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 103.84716698899865,
+      "retrieval_ms": 107.3030000552535,
       "top5": [
         "readme.md:559-663",
         "readme.md:1816-1829",
@@ -1997,7 +2035,7 @@
       "id": "ky-16",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 0.8094171062111855,
+      "retrieval_ms": 0.9482908062636852,
       "top5": [
         "test/request-options.ts:1-48",
         "source/core/Ky.ts:558-588",
@@ -2011,7 +2049,7 @@
       "id": "ky-16",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 6.6438340581953526,
+      "retrieval_ms": 8.089915849268436,
       "top5": [
         "source/core/Ky.ts:1329-1339",
         "source/core/Ky.ts:1353-1357",
@@ -2025,7 +2063,7 @@
       "id": "ky-16",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 7.154374849051237,
+      "retrieval_ms": 8.876792155206203,
       "top5": [
         "source/types/hooks.ts:262-321",
         "source/core/Ky.ts:558-588",
@@ -2039,7 +2077,7 @@
       "id": "ky-16",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 104.53000012785196,
+      "retrieval_ms": 106.28070775419474,
       "top5": [
         "source/types/hooks.ts:262-321",
         "source/types/options.ts:295-354",

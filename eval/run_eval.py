@@ -162,6 +162,18 @@ def summarize(rows: list[dict], settings, llm, device: str) -> dict:
             entry["answer_rate"] = mean([0.0 if r["refused"] else 1.0 for r in answerable])
             entry["abstention"] = mean([1.0 if r["refused"] else 0.0 for r in unanswerable])
         summary[mode] = entry
+
+    by_repo: dict[str, dict] = {}
+    for repo in dict.fromkeys(r["repo"] for r in rows):
+        by_repo[repo] = {}
+        for mode in MODES:
+            subset = [
+                r for r in rows if r["repo"] == repo and r["mode"] == mode and r["answerable"]
+            ]
+            by_repo[repo][mode] = {
+                "recall@5": mean([r["recall@5"] for r in subset]),
+                "mrr@10": mean([r["rr@10"] for r in subset]),
+            }
     return {
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "config": {
@@ -174,6 +186,7 @@ def summarize(rows: list[dict], settings, llm, device: str) -> dict:
         "num_questions": len({(r["repo"], r["id"]) for r in rows}),
         "num_answerable": len({(r["repo"], r["id"]) for r in rows if r["answerable"]}),
         "summary": summary,
+        "by_repo": by_repo,
         "per_question": rows,
     }
 
@@ -201,6 +214,22 @@ def to_markdown(result: dict) -> str:
             f"{fmt(s.get('faithfulness'))} | {fmt(s.get('answer_rate'), pct=True)} | "
             f"{fmt(s.get('abstention'), pct=True)} | {s['retrieval_ms']:.0f} ms |"
         )
+
+    repos = list(result["by_repo"])
+    lines += [
+        "",
+        "Per repository (Recall@5 / MRR@10):",
+        "",
+        "| Retrieval mode | " + " | ".join(repos) + " |",
+        "|---|" + "---|" * len(repos),
+    ]
+    for mode in result["summary"]:
+        cells = [
+            f"{fmt(result['by_repo'][r][mode]['recall@5'])} / "
+            f"{fmt(result['by_repo'][r][mode]['mrr@10'])}"
+            for r in repos
+        ]
+        lines.append(f"| {MODE_LABELS[mode]} | " + " | ".join(cells) + " |")
     return "\n".join(lines) + "\n"
 
 
