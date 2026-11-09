@@ -8,6 +8,8 @@
 
 *Indexing `pallets/itsdangerous`, asking how `TimestampSigner` decides a signature has expired, and clicking a citation to open the cited lines.*
 
+*Demo answer generated with gemini-3.6-flash; the default model is configurable via GEMINI_MODEL.*
+
 RepoRAG clones a public GitHub repository, splits the code and docs into function- and section-sized chunks, and indexes them for hybrid search (keyword + semantic). When you ask a question, it retrieves the most relevant chunks, has an LLM answer **only** from them, and cites every claim with a file path and line range you can click to inspect. If the repo doesn't contain the answer, it says *"not enough information in this repo"* instead of guessing.
 
 ---
