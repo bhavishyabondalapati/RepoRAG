@@ -38,14 +38,22 @@ def _retry_after(exc: Exception) -> float | None:
 class GeminiProvider:
     name = "gemini"
 
-    def __init__(self, api_key: str | None, model: str, max_attempts: int = 5):
+    def __init__(
+        self, api_key: str | None, model: str, max_attempts: int = 5, timeout_s: float = 60.0
+    ):
         if not api_key:
             raise LLMError("GEMINI_API_KEY is not set. Add it to your .env file.")
         from google import genai
+        from google.genai import types
 
-        self._client = genai.Client(api_key=api_key)
+        # Without a timeout a stalled connection hangs the request forever. A timeout
+        # raises httpx.TimeoutException, which `_is_retryable` treats like any transient error.
+        self._client = genai.Client(
+            api_key=api_key, http_options=types.HttpOptions(timeout=int(timeout_s * 1000))
+        )
         self.model = model
         self.max_attempts = max_attempts
+        self.timeout_s = timeout_s
 
     def generate(self, prompt: str, system: str | None = None, temperature: float = 0.0) -> str:
         from google.genai import errors, types

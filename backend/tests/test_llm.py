@@ -128,3 +128,17 @@ def test_gemini_reads_retry_delay_from_429():
     assert _retry_after(errors.APIError(429, body)) == 41.0
     assert _retry_after(errors.APIError(503, {"error": {"message": "busy"}})) is None
     assert _retry_after(ValueError("x")) is None
+
+
+def test_gemini_client_has_a_request_timeout():
+    # A stalled connection must time out (and then be retried), not hang the request forever.
+    from reporag.llm.gemini import GeminiProvider
+
+    provider = GeminiProvider("test-key", "m", timeout_s=12.5)
+    assert provider._client._api_client._http_options.timeout == 12500
+
+
+def test_timeouts_are_retryable():
+    import httpx
+
+    assert _is_retryable(httpx.ReadTimeout("stalled"))
