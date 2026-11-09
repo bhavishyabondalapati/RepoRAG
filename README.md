@@ -1,5 +1,7 @@
 # RepoRAG
 
+[![CI](https://github.com/bhavishyabondalapati/RepoRAG/actions/workflows/ci.yml/badge.svg)](https://github.com/bhavishyabondalapati/RepoRAG/actions/workflows/ci.yml)
+
 **Ask questions about any public GitHub repo and get answers that cite the exact files and lines.**
 
 RepoRAG clones a public GitHub repository, splits the code and docs into function- and section-sized chunks, and indexes them for hybrid search (keyword + semantic). When you ask a question, it retrieves the most relevant chunks, has an LLM answer **only** from them, and cites every claim with a file path and line range you can click to inspect. If the repo doesn't contain the answer, it says *"not enough information in this repo"* instead of guessing.
@@ -93,15 +95,16 @@ A separate **held-out set of 20 questions** (18 answerable, 2 unanswerable) live
 - **MRR@10:** mean of 1 / rank of the first relevant chunk
 - **Faithfulness:** an LLM judge splits each answer into claims and checks each against the retrieved context
 - **Answer rate / Abstention:** answerable questions that got an answer, and unanswerable questions that were correctly refused
+- **Citation precision / recall:** of the chunks an answer cites, the share that overlap the gold evidence (precision), and the share of gold evidence spans the citations cover (recall). Deterministic, no extra LLM calls
 
 Results from a real run (`python eval/run_eval.py --no-llm`, Apple M4 Pro, MPS):
 
-| Retrieval mode | Recall@5 | MRR@10 | Faithfulness | Answer rate | Abstention | Retrieval latency |
-|---|---|---|---|---|---|---|
-| BM25 only | 0.589 | 0.486 | TODO | TODO | TODO | 1 ms |
-| Dense only | 0.518 | 0.335 | TODO | TODO | TODO | 20 ms |
-| Hybrid (RRF) | 0.589 | 0.446 | TODO | TODO | TODO | 8 ms |
-| Hybrid + rerank | 0.589 | 0.385 | TODO | TODO | TODO | 117 ms |
+| Retrieval mode | Recall@5 | MRR@10 | Retrieval latency |
+|---|---|---|---|
+| BM25 only | 0.589 | 0.486 | 1 ms |
+| Dense only | 0.518 | 0.335 | 14 ms |
+| Hybrid (RRF) | 0.589 | 0.446 | 8 ms |
+| Hybrid + rerank | 0.589 | 0.385 | 110 ms |
 
 Per repository (Recall@5 / MRR@10):
 
@@ -123,7 +126,7 @@ Per repository (Recall@5 / MRR@10):
 
 The pattern matches the dev set: itsdangerous is easy for every mode, ky is hard, and the reranker doesn't help on ky.
 
-> **TODO:** Faithfulness, answer rate and abstention are not measured yet. The Gemini free tier allows 20 requests per day per model, and the LLM part of the eval needs about 100 (answers plus judge calls, production mode only). They will be filled in from a real run of `python eval/run_eval.py --llm-modes hybrid_rerank --rpm 4`, which caches responses and can resume across days. No numbers here are estimated.
+> **Not measured yet:** faithfulness, answer rate, abstention, and citation precision/recall. The eval code for all five is written and unit-tested, but it needs about 100 Gemini calls (answers plus judge calls) and the free tier allows 20 per day per model, so I have not run it. The retrieval metrics above are the measured results; none of the LLM numbers are estimated. To measure them: `python eval/run_eval.py --llm-modes hybrid_rerank --rpm 4` (responses are cached, so it can resume across days).
 
 **What the numbers say:**
 
@@ -383,7 +386,7 @@ What to understand (and be able to explain in an interview):
 - Add tree-sitter grammars for Go, Rust and Java.
 - Stream answers token by token, and add multi-turn conversation memory.
 - Index by commit SHA, with incremental re-indexing of changed files.
-- Grow the eval set, add a held-out split for tuning thresholds, and add human-graded faithfulness.
+- Grow the eval set (the held-out split already exists; tune the refusal threshold on a separate validation split), and add human-graded faithfulness.
 - Add more LLM providers behind the existing interface.
 
 ## License

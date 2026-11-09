@@ -145,7 +145,7 @@ For 28 questions I labelled the **gold evidence** (file + line range) by reading
 - **Faithfulness (LLM judge):** a second LLM call splits the answer into claims and checks each against the retrieved context. Score = supported / total. LLM judges are convenient but imperfect, so the prompt forbids outside knowledge and the raw JSON is parsed strictly.
 - **Answer rate / abstention:** see section 6.
 
-**Rules I followed.** Numbers in the README come only from real runs of `eval/run_eval.py`. Anything that couldn't be run (faithfulness needs an API key) is marked TODO. I did **not** tune the system on this dataset after seeing the results. With only 32 questions that would just overfit, so the weaknesses it exposed are listed as limitations and future work.
+**Rules I followed.** Numbers in the README come only from real runs of `eval/run_eval.py`. Anything that couldn't be run (the LLM metrics need about 100 Gemini calls, more than the free tier allows per day) is stated as not measured, never estimated. I did **not** tune the system on this dataset after seeing the results. With only 32 questions that would just overfit, so the weaknesses it exposed are listed as limitations and future work.
 
 > *Interview answer:* "I built a small labelled eval with gold file-and-line evidence and compared four retrieval setups. Hybrid search won on the clean repo; the web-trained reranker hurt; and big test files were the main failure mode. I reported that instead of tuning to the test set."
 

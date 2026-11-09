@@ -1,11 +1,13 @@
-Run: 2026-11-01T14:28:13+00:00 · 20 questions (18 answerable) · device `mps` · LLM `not run`
+Run: 2026-11-08T23:57:34+00:00 · 20 questions (18 answerable) · device `mps` · LLM `not run`
 
-| Retrieval mode | Recall@5 | MRR@10 | Faithfulness | Answer rate | Abstention | Retrieval latency |
-|---|---|---|---|---|---|---|
-| BM25 only | 0.722 | 0.687 | TODO | TODO | TODO | 1 ms |
-| Dense only | 0.667 | 0.631 | TODO | TODO | TODO | 24 ms |
-| Hybrid (RRF) | 0.722 | 0.667 | TODO | TODO | TODO | 8 ms |
-| Hybrid + rerank | 0.667 | 0.639 | TODO | TODO | TODO | 109 ms |
+| Retrieval mode | Recall@5 | MRR@10 | Retrieval latency |
+|---|---|---|---|
+| BM25 only | 0.722 | 0.687 | 1 ms |
+| Dense only | 0.667 | 0.631 | 12 ms |
+| Hybrid (RRF) | 0.722 | 0.667 | 8 ms |
+| Hybrid + rerank | 0.667 | 0.639 | 106 ms |
+
+Faithfulness, answer rate, abstention and citation precision/recall are not measured in this run (no LLM calls). Retrieval metrics are the measured results.
 
 Per repository (Recall@5 / MRR@10):
 

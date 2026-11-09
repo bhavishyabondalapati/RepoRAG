@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:28:13+00:00",
+  "generated_at": "2026-11-08T23:57:34+00:00",
   "config": {
     "embedding_model": "BAAI/bge-small-en-v1.5",
     "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
@@ -14,22 +14,22 @@
     "bm25": {
       "recall@5": 0.7222222222222222,
       "mrr@10": 0.6870370370370371,
-      "retrieval_ms": 0.5984332878142595
+      "retrieval_ms": 0.6029603071510792
     },
     "dense": {
       "recall@5": 0.6666666666666666,
       "mrr@10": 0.6305555555555555,
-      "retrieval_ms": 24.463787325657904
+      "retrieval_ms": 12.443025154061615
     },
     "hybrid": {
       "recall@5": 0.7222222222222222,
       "mrr@10": 0.6666666666666666,
-      "retrieval_ms": 7.846804149448872
+      "retrieval_ms": 7.65135413967073
     },
     "hybrid_rerank": {
       "recall@5": 0.6666666666666666,
       "mrr@10": 0.6388888888888888,
-      "retrieval_ms": 109.43715805187821
+      "retrieval_ms": 106.04194591287524
     }
   },
   "by_repo": {
@@ -76,7 +76,7 @@
       "id": "h-itsd-01",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.3466671332716942,
+      "retrieval_ms": 0.20579202100634575,
       "top5": [
         "src/itsdangerous/timed.py:44-51",
         "src/itsdangerous/signer.py:221-225",
@@ -92,7 +92,7 @@
       "id": "h-itsd-01",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 347.681500017643,
+      "retrieval_ms": 102.67154173925519,
       "top5": [
         "src/itsdangerous/encoding.py:11-17",
         "tests/test_itsdangerous/test_encoding.py:11-14",
@@ -108,7 +108,7 @@
       "id": "h-itsd-01",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 12.298292014747858,
+      "retrieval_ms": 10.370125062763691,
       "top5": [
         "src/itsdangerous/signer.py:221-225",
         "src/itsdangerous/encoding.py:11-17",
@@ -124,7 +124,7 @@
       "id": "h-itsd-01",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 218.03183294832706,
+      "retrieval_ms": 151.4353333041072,
       "top5": [
         "src/itsdangerous/encoding.py:11-17",
         "src/itsdangerous/timed.py:44-51",
@@ -140,7 +140,7 @@
       "id": "h-itsd-02",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.16749976202845573,
+      "retrieval_ms": 0.15187496319413185,
       "top5": [
         "src/itsdangerous/signer.py:31-37",
         "tests/test_itsdangerous/test_signer.py:1-10",
@@ -156,7 +156,7 @@
       "id": "h-itsd-02",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.1450830437242985,
+      "retrieval_ms": 7.273875176906586,
       "top5": [
         "src/itsdangerous/signer.py:31-37",
         "src/itsdangerous/signer.py:15-28",
@@ -172,7 +172,7 @@
       "id": "h-itsd-02",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.191832643002272,
+      "retrieval_ms": 6.655541248619556,
       "top5": [
         "src/itsdangerous/signer.py:31-37",
         "tests/test_itsdangerous/test_signer.py:13-15",
@@ -188,7 +188,7 @@
       "id": "h-itsd-02",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.96700010076165,
+      "retrieval_ms": 101.02241672575474,
       "top5": [
         "src/itsdangerous/signer.py:31-37",
         "src/itsdangerous/signer.py:48-64",
@@ -204,7 +204,7 @@
       "id": "h-itsd-03",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.2049170434474945,
+      "retrieval_ms": 0.2204999327659607,
       "top5": [
         "src/itsdangerous/exc.py:22-33",
         "src/itsdangerous/exc.py:36-57",
@@ -220,7 +220,7 @@
       "id": "h-itsd-03",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.65595817938447,
+      "retrieval_ms": 7.594750262796879,
       "top5": [
         "src/itsdangerous/exc.py:22-33",
         "src/itsdangerous/signer.py:243-256",
@@ -236,7 +236,7 @@
       "id": "h-itsd-03",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.820334121584892,
+      "retrieval_ms": 6.701166741549969,
       "top5": [
         "src/itsdangerous/exc.py:22-33",
         "src/itsdangerous/exc.py:36-57",
@@ -252,7 +252,7 @@
       "id": "h-itsd-03",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 100.14391597360373,
+      "retrieval_ms": 100.68324999883771,
       "top5": [
         "src/itsdangerous/exc.py:22-33",
         "docs/serializer.rst:51-110",
@@ -268,7 +268,7 @@
       "id": "h-itsd-04",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.2121669240295887,
+      "retrieval_ms": 0.23429188877344131,
       "top5": [
         "src/itsdangerous/exc.py:36-57",
         "tests/test_itsdangerous/test_timed.py:29-93",
@@ -284,7 +284,7 @@
       "id": "h-itsd-04",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.950040813535452,
+      "retrieval_ms": 8.672125171869993,
       "top5": [
         "src/itsdangerous/exc.py:36-57",
         "src/itsdangerous/timed.py:71-158",
@@ -300,7 +300,7 @@
       "id": "h-itsd-04",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.503375247120857,
+      "retrieval_ms": 7.225499954074621,
       "top5": [
         "src/itsdangerous/exc.py:36-57",
         "src/itsdangerous/timed.py:71-158",
@@ -316,7 +316,7 @@
       "id": "h-itsd-04",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.090416777879,
+      "retrieval_ms": 103.74508332461119,
       "top5": [
         "src/itsdangerous/exc.py:36-57",
         "tests/test_itsdangerous/test_serializer.py:70-78",
@@ -332,7 +332,7 @@
       "id": "h-itsd-05",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.15008263289928436,
+      "retrieval_ms": 0.17837528139352798,
       "top5": [
         "src/itsdangerous/_json.py:7-18",
         "src/itsdangerous/url_safe.py:1-12",
@@ -348,7 +348,7 @@
       "id": "h-itsd-05",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.855416111648083,
+      "retrieval_ms": 7.024749647825956,
       "top5": [
         "src/itsdangerous/_json.py:7-18",
         "src/itsdangerous/serializer.py:308-320",
@@ -364,7 +364,7 @@
       "id": "h-itsd-05",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.486666854470968,
+      "retrieval_ms": 6.562457885593176,
       "top5": [
         "src/itsdangerous/_json.py:7-18",
         "src/itsdangerous/url_safe.py:15-69",
@@ -380,7 +380,7 @@
       "id": "h-itsd-05",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 100.46220803633332,
+      "retrieval_ms": 100.5676663480699,
       "top5": [
         "src/itsdangerous/_json.py:7-18",
         "src/itsdangerous/url_safe.py:15-69",
@@ -396,7 +396,7 @@
       "id": "h-itsd-06",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.1500002108514309,
+      "retrieval_ms": 0.1755421981215477,
       "top5": [
         "src/itsdangerous/serializer.py:32-37",
         "src/itsdangerous/serializer.py:242-269",
@@ -412,7 +412,7 @@
       "id": "h-itsd-06",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.467667408287525,
+      "retrieval_ms": 7.037125062197447,
       "top5": [
         "README.md:3-15",
         "src/itsdangerous/serializer.py:137-153",
@@ -428,7 +428,7 @@
       "id": "h-itsd-06",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.444417104125023,
+      "retrieval_ms": 6.403792183846235,
       "top5": [
         "src/itsdangerous/serializer.py:32-37",
         "src/itsdangerous/serializer.py:308-320",
@@ -444,7 +444,7 @@
       "id": "h-itsd-06",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.63566563278437,
+      "retrieval_ms": 101.4880002476275,
       "top5": [
         "src/itsdangerous/serializer.py:32-37",
         "src/itsdangerous/serializer.py:270-276",
@@ -460,7 +460,7 @@
       "id": "h-itsd-07",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.22837473079562187,
+      "retrieval_ms": 0.26783300563693047,
       "top5": [
         "src/itsdangerous/timed.py:170-228",
         "src/itsdangerous/__init__.py:1-17",
@@ -476,7 +476,7 @@
       "id": "h-itsd-07",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.030667271465063,
+      "retrieval_ms": 7.494249846786261,
       "top5": [
         "src/itsdangerous/timed.py:170-228",
         "src/itsdangerous/timed.py:22-28",
@@ -492,7 +492,7 @@
       "id": "h-itsd-07",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.966916378587484,
+      "retrieval_ms": 6.614333018660545,
       "top5": [
         "src/itsdangerous/timed.py:170-228",
         "docs/serializer.rst:51-110",
@@ -508,7 +508,7 @@
       "id": "h-itsd-07",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.70683281123638,
+      "retrieval_ms": 102.30283392593265,
       "top5": [
         "src/itsdangerous/timed.py:170-228",
         "docs/serializer.rst:51-110",
@@ -524,7 +524,7 @@
       "id": "h-itsd-08",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.14912476763129234,
+      "retrieval_ms": 0.15399977564811707,
       "top5": [
         "src/itsdangerous/timed.py:34-43",
         "src/itsdangerous/timed.py:71-158",
@@ -540,7 +540,7 @@
       "id": "h-itsd-08",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.151291705667973,
+      "retrieval_ms": 7.015332579612732,
       "top5": [
         "src/itsdangerous/timed.py:34-43",
         "src/itsdangerous/timed.py:71-158",
@@ -556,7 +556,7 @@
       "id": "h-itsd-08",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.767707876861095,
+      "retrieval_ms": 6.718332879245281,
       "top5": [
         "src/itsdangerous/timed.py:34-43",
         "src/itsdangerous/timed.py:71-158",
@@ -572,7 +572,7 @@
       "id": "h-itsd-08",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 101.17783304303885,
+      "retrieval_ms": 102.8377921320498,
       "top5": [
         "src/itsdangerous/timed.py:34-43",
         "src/itsdangerous/timed.py:71-158",
@@ -588,7 +588,7 @@
       "id": "h-itsd-09",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.1716669648885727,
+      "retrieval_ms": 0.1772083342075348,
       "top5": [
         "docs/concepts.rst:1-60",
         "src/itsdangerous/signer.py:76-128",
@@ -604,7 +604,7 @@
       "id": "h-itsd-09",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.832665763795376,
+      "retrieval_ms": 8.161417208611965,
       "top5": [
         "docs/concepts.rst:51-110",
         "tests/test_itsdangerous/test_serializer.py:121-128",
@@ -620,7 +620,7 @@
       "id": "h-itsd-09",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.8642497062683105,
+      "retrieval_ms": 7.178834173828363,
       "top5": [
         "docs/concepts.rst:1-60",
         "docs/concepts.rst:51-110",
@@ -636,7 +636,7 @@
       "id": "h-itsd-09",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 108.37329085916281,
+      "retrieval_ms": 104.46558427065611,
       "top5": [
         "src/itsdangerous/signer.py:76-128",
         "docs/concepts.rst:51-110",
@@ -652,7 +652,7 @@
       "id": "h-itsd-10",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 0.21474994719028473,
+      "retrieval_ms": 0.2398332580924034,
       "top5": [
         "src/itsdangerous/exc.py:92-106",
         "src/itsdangerous/exc.py:7-19",
@@ -666,7 +666,7 @@
       "id": "h-itsd-10",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 7.739790715277195,
+      "retrieval_ms": 7.6468330807983875,
       "top5": [
         "README.md:3-15",
         "README.md:16-34",
@@ -680,7 +680,7 @@
       "id": "h-itsd-10",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 7.499125320464373,
+      "retrieval_ms": 7.270584348589182,
       "top5": [
         "src/itsdangerous/signer.py:129-173",
         "src/itsdangerous/exc.py:7-19",
@@ -694,7 +694,7 @@
       "id": "h-itsd-10",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 102.09983261302114,
+      "retrieval_ms": 104.32629100978374,
       "top5": [
         "docs/index.rst:1-60",
         "docs/concepts.rst:1-60",
@@ -708,7 +708,7 @@
       "id": "h-ky-01",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.7747919298708439,
+      "retrieval_ms": 0.9569157846271992,
       "top5": [
         "test/methods.ts:130-138",
         "readme.md:471-479",
@@ -724,7 +724,7 @@
       "id": "h-ky-01",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.990542031824589,
+      "retrieval_ms": 7.561584003269672,
       "top5": [
         "readme.md:176-184",
         "source/types/ky.ts:55-114",
@@ -740,7 +740,7 @@
       "id": "h-ky-01",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.984833024442196,
+      "retrieval_ms": 8.315875194966793,
       "top5": [
         "readme.md:93-149",
         "test/methods.ts:130-138",
@@ -756,7 +756,7 @@
       "id": "h-ky-01",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.90433296561241,
+      "retrieval_ms": 105.94504186883569,
       "top5": [
         "readme.md:664-706",
         "readme.md:176-184",
@@ -772,7 +772,7 @@
       "id": "h-ky-02",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.816666055470705,
+      "retrieval_ms": 0.8439579978585243,
       "top5": [
         "test/retry-decisions.ts:290-324",
         "test/retry-decisions.ts:240-299",
@@ -788,7 +788,7 @@
       "id": "h-ky-02",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.684249896556139,
+      "retrieval_ms": 7.802624721080065,
       "top5": [
         "source/types/options.ts:195-254",
         "readme.md:404-414",
@@ -804,7 +804,7 @@
       "id": "h-ky-02",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.14637478813529,
+      "retrieval_ms": 8.198583964258432,
       "top5": [
         "source/types/options.ts:195-254",
         "readme.md:415-439",
@@ -820,7 +820,7 @@
       "id": "h-ky-02",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.38775021955371,
+      "retrieval_ms": 105.425916146487,
       "top5": [
         "source/types/options.ts:195-254",
         "readme.md:404-414",
@@ -836,7 +836,7 @@
       "id": "h-ky-03",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.9402916766703129,
+      "retrieval_ms": 1.2887497432529926,
       "top5": [
         "source/errors/HTTPError.ts:6-34",
         "source/types/ResponsePromise.ts:1-7",
@@ -852,7 +852,7 @@
       "id": "h-ky-03",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.79879093170166,
+      "retrieval_ms": 9.31191723793745,
       "top5": [
         "readme.md:440-460",
         "readme.md:404-414",
@@ -868,7 +868,7 @@
       "id": "h-ky-03",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.943166885524988,
+      "retrieval_ms": 8.697791025042534,
       "top5": [
         "source/types/options.ts:245-304",
         "readme.md:404-414",
@@ -884,7 +884,7 @@
       "id": "h-ky-03",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.10008330270648,
+      "retrieval_ms": 106.77420906722546,
       "top5": [
         "source/types/options.ts:295-354",
         "readme.md:404-414",
@@ -900,7 +900,7 @@
       "id": "h-ky-04",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.9229592978954315,
+      "retrieval_ms": 0.9992499835789204,
       "top5": [
         "test/resilience.ts:302-361",
         "test/resilience.ts:434-493",
@@ -916,7 +916,7 @@
       "id": "h-ky-04",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.471625227481127,
+      "retrieval_ms": 8.186541963368654,
       "top5": [
         "test/resilience.ts:216-250",
         "test/resilience.ts:434-493",
@@ -932,7 +932,7 @@
       "id": "h-ky-04",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.847416214644909,
+      "retrieval_ms": 9.184208232909441,
       "top5": [
         "test/resilience.ts:434-493",
         "test/resilience.ts:302-361",
@@ -948,7 +948,7 @@
       "id": "h-ky-04",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 103.10233384370804,
+      "retrieval_ms": 106.6410830244422,
       "top5": [
         "test/retry.ts:5336-5414",
         "source/core/Ky.ts:1124-1216",
@@ -964,7 +964,7 @@
       "id": "h-ky-05",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.372333150357008,
+      "retrieval_ms": 1.2371661141514778,
       "top5": [
         "source/core/constants.ts:41-55",
         "test/response-consumption.ts:148-262",
@@ -980,7 +980,7 @@
       "id": "h-ky-05",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.016124833375216,
+      "retrieval_ms": 8.009541779756546,
       "top5": [
         "source/core/constants.ts:41-55",
         "test/response-consumption.ts:148-262",
@@ -996,7 +996,7 @@
       "id": "h-ky-05",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.700292091816664,
+      "retrieval_ms": 8.618790656328201,
       "top5": [
         "source/core/constants.ts:41-55",
         "test/response-consumption.ts:148-262",
@@ -1012,7 +1012,7 @@
       "id": "h-ky-05",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 106.77833296358585,
+      "retrieval_ms": 105.8796658180654,
       "top5": [
         "source/core/constants.ts:41-55",
         "source/types/ResponsePromise.ts:1-7",
@@ -1028,7 +1028,7 @@
       "id": "h-ky-06",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.7466250099241734,
+      "retrieval_ms": 0.8785407990217209,
       "top5": [
         "readme.md:1751-1777",
         "test-d/url-options.ts:1-8",
@@ -1044,7 +1044,7 @@
       "id": "h-ky-06",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 6.660042330622673,
+      "retrieval_ms": 7.451958954334259,
       "top5": [
         "readme.md:1751-1777",
         "readme.md:232-259",
@@ -1060,7 +1060,7 @@
       "id": "h-ky-06",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 6.981625221669674,
+      "retrieval_ms": 8.50454205647111,
       "top5": [
         "readme.md:1751-1777",
         "readme.md:232-259",
@@ -1076,7 +1076,7 @@
       "id": "h-ky-06",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.51179104670882,
+      "retrieval_ms": 106.6829590126872,
       "top5": [
         "readme.md:1751-1777",
         "readme.md:232-259",
@@ -1092,7 +1092,7 @@
       "id": "h-ky-07",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 0.46887481585144997,
+      "retrieval_ms": 0.4865000955760479,
       "top5": [
         "readme.md:1935-1940",
         "source/errors/HTTPError.ts:6-34",
@@ -1108,7 +1108,7 @@
       "id": "h-ky-07",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.027416188269854,
+      "retrieval_ms": 7.396917324513197,
       "top5": [
         "readme.md:1935-1940",
         "readme.md:1-20",
@@ -1124,7 +1124,7 @@
       "id": "h-ky-07",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 7.169665768742561,
+      "retrieval_ms": 6.784791126847267,
       "top5": [
         "readme.md:1935-1940",
         "readme.md:156-161",
@@ -1140,7 +1140,7 @@
       "id": "h-ky-07",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 102.61858394369483,
+      "retrieval_ms": 100.71416711434722,
       "top5": [
         "readme.md:1935-1940",
         "readme.md:156-161",
@@ -1156,7 +1156,7 @@
       "id": "h-ky-08",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.230624970048666,
+      "retrieval_ms": 1.0457499884068966,
       "top5": [
         "source/types/retry.ts:21-80",
         "readme.md:260-319",
@@ -1172,7 +1172,7 @@
       "id": "h-ky-08",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 7.166082970798016,
+      "retrieval_ms": 7.57212471216917,
       "top5": [
         "readme.md:1148-1155",
         "source/types/ky.ts:155-205",
@@ -1188,7 +1188,7 @@
       "id": "h-ky-08",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 8.942416403442621,
+      "retrieval_ms": 7.257041055709124,
       "top5": [
         "readme.md:310-369",
         "source/types/retry.ts:121-180",
@@ -1204,7 +1204,7 @@
       "id": "h-ky-08",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 109.72704086452723,
+      "retrieval_ms": 103.45562500879169,
       "top5": [
         "source/core/constants.ts:178-263",
         "source/types/retry.ts:121-180",
@@ -1220,7 +1220,7 @@
       "id": "h-ky-09",
       "mode": "bm25",
       "answerable": true,
-      "retrieval_ms": 1.5395409427583218,
+      "retrieval_ms": 1.4416668564081192,
       "top5": [
         "source/utils/type-guards.ts:8-10",
         "readme.md:664-706",
@@ -1236,7 +1236,7 @@
       "id": "h-ky-09",
       "mode": "dense",
       "answerable": true,
-      "retrieval_ms": 8.353082928806543,
+      "retrieval_ms": 7.620250340551138,
       "top5": [
         "source/utils/type-guards.ts:12-39",
         "source/core/Ky.ts:781-812",
@@ -1252,7 +1252,7 @@
       "id": "h-ky-09",
       "mode": "hybrid",
       "answerable": true,
-      "retrieval_ms": 9.723584167659283,
+      "retrieval_ms": 8.579291868954897,
       "top5": [
         "source/utils/type-guards.ts:12-39",
         "source/utils/type-guards.ts:8-10",
@@ -1268,7 +1268,7 @@
       "id": "h-ky-09",
       "mode": "hybrid_rerank",
       "answerable": true,
-      "retrieval_ms": 109.21845817938447,
+      "retrieval_ms": 104.5150002464652,
       "top5": [
         "source/errors/KyError.ts:1-14",
         "source/utils/type-guards.ts:12-39",
@@ -1284,7 +1284,7 @@
       "id": "h-ky-10",
       "mode": "bm25",
       "answerable": false,
-      "retrieval_ms": 1.1607077904045582,
+      "retrieval_ms": 0.8754581212997437,
       "top5": [
         "readme.md:1-20",
         "readme.md:1927-1930",
@@ -1298,7 +1298,7 @@
       "id": "h-ky-10",
       "mode": "dense",
       "answerable": false,
-      "retrieval_ms": 7.597708143293858,
+      "retrieval_ms": 7.355042267590761,
       "top5": [
         "readme.md:1-20",
         "source/core/Ky.ts:1358-1362",
@@ -1312,7 +1312,7 @@
       "id": "h-ky-10",
       "mode": "hybrid",
       "answerable": false,
-      "retrieval_ms": 8.653791155666113,
+      "retrieval_ms": 7.185500115156174,
       "top5": [
         "readme.md:1-20",
         "source/core/Ky.ts:508-567",
@@ -1326,7 +1326,7 @@
       "id": "h-ky-10",
       "mode": "hybrid_rerank",
       "answerable": false,
-      "retrieval_ms": 105.70562491193414,
+      "retrieval_ms": 101.93099966272712,
       "top5": [
         "readme.md:1532-1558",
         "readme.md:1816-1829",
