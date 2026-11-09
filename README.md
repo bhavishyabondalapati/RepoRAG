@@ -4,9 +4,11 @@
 
 **Ask questions about any public GitHub repo and get answers that cite the exact files and lines.**
 
-RepoRAG clones a public GitHub repository, splits the code and docs into function- and section-sized chunks, and indexes them for hybrid search (keyword + semantic). When you ask a question, it retrieves the most relevant chunks, has an LLM answer **only** from them, and cites every claim with a file path and line range you can click to inspect. If the repo doesn't contain the answer, it says *"not enough information in this repo"* instead of guessing.
+![RepoRAG answering a question about pallets/itsdangerous, with the cited lines open in the source panel](docs/demo.png)
 
-> **Demo GIF:** TODO. Record the app (index a repo → ask → click a citation) and save it as `docs/demo.gif`, then replace this line with `![RepoRAG demo](docs/demo.gif)`.
+*Indexing `pallets/itsdangerous`, asking how `TimestampSigner` decides a signature has expired, and clicking a citation to open the cited lines.*
+
+RepoRAG clones a public GitHub repository, splits the code and docs into function- and section-sized chunks, and indexes them for hybrid search (keyword + semantic). When you ask a question, it retrieves the most relevant chunks, has an LLM answer **only** from them, and cites every claim with a file path and line range you can click to inspect. If the repo doesn't contain the answer, it says *"not enough information in this repo"* instead of guessing.
 
 ---
 
