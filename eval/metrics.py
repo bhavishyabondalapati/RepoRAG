@@ -36,6 +36,18 @@ def reciprocal_rank(retrieved: list[tuple[str, int, int]], gold: list[Span], k: 
     return 0.0
 
 
+def citation_precision(cited: list[tuple[str, int, int]], gold: list[Span]) -> float | None:
+    """Share of cited chunks that overlap a gold evidence span (None if nothing was cited)."""
+    if not cited:
+        return None
+    return sum(1 for p, s, e in cited if any(overlaps(p, s, e, g) for g in gold)) / len(cited)
+
+
+def citation_recall(cited: list[tuple[str, int, int]], gold: list[Span]) -> float:
+    """Fraction of gold evidence spans covered by at least one cited chunk."""
+    return recall_at_k(cited, gold, k=len(cited))
+
+
 JUDGE_SYSTEM = """You are a strict evaluator of answer faithfulness for a retrieval system.
 You check whether every factual claim in an ANSWER is directly supported by the CONTEXT.
 Ignore citation markers like [1]. Do not use outside knowledge: a claim that is true in

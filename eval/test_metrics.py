@@ -1,6 +1,14 @@
 import pytest
 
-from metrics import Span, overlaps, parse_judge_score, recall_at_k, reciprocal_rank
+from metrics import (
+    Span,
+    citation_precision,
+    citation_recall,
+    overlaps,
+    parse_judge_score,
+    recall_at_k,
+    reciprocal_rank,
+)
 
 GOLD = [Span("a.py", 10, 20), Span("b.py", 1, 5)]
 
@@ -39,3 +47,16 @@ def test_parse_judge_score():
     assert parse_judge_score('{"supported": 3, "total": 3}') == 1.0
     assert parse_judge_score("no json here") is None
     assert parse_judge_score("{broken") is None
+
+
+def test_citation_precision_is_share_of_cited_chunks_on_gold():
+    cited = [("a.py", 12, 15), ("x.py", 1, 9), ("b.py", 3, 4), ("a.py", 40, 50)]
+    assert citation_precision(cited, GOLD) == 0.5
+    assert citation_precision([("x.py", 1, 9)], GOLD) == 0.0
+    assert citation_precision([], GOLD) is None
+
+
+def test_citation_recall_is_share_of_gold_spans_cited():
+    assert citation_recall([("a.py", 12, 15), ("x.py", 1, 9)], GOLD) == 0.5
+    assert citation_recall([("a.py", 12, 15), ("b.py", 1, 1)], GOLD) == 1.0
+    assert citation_recall([], GOLD) == 0.0

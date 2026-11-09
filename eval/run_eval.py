@@ -15,6 +15,9 @@ Reports, per mode (bm25 / dense / hybrid / hybrid_rerank):
     faithfulness  share of answer claims supported by the retrieved context (LLM judge)
     answer rate   answerable questions that got an answer instead of a refusal
     abstention    unanswerable questions correctly refused
+    citation precision / recall (answers only; no extra LLM calls)
+                  precision: share of cited chunks that overlap gold evidence
+                  recall: share of gold evidence spans covered by the cited chunks
 """
 
 from __future__ import annotations
@@ -37,6 +40,8 @@ from metrics import (  # noqa: E402
     JUDGE_SYSTEM,
     Span,
     build_judge_prompt,
+    citation_precision,
+    citation_recall,
     parse_judge_score,
     recall_at_k,
     reciprocal_rank,
@@ -152,6 +157,11 @@ def judge_answer(q: dict, retriever: Retriever, llm, mode: str, settings) -> dic
     out = {"answer": answer.text, "refused": answer.insufficient}
     if answer.insufficient:
         return out
+    gold = [Span(g["path"], g["start"], g["end"]) for g in q["gold"]]
+    if gold:
+        cited = [(c.chunk.path, c.chunk.start_line, c.chunk.end_line) for _, c in answer.citations]
+        out["citation_precision"] = citation_precision(cited, gold)
+        out["citation_recall"] = citation_recall(cited, gold)
     context = "\n\n".join(
         f"[{n}] {r.chunk.path}:{r.chunk.start_line}-{r.chunk.end_line}\n{r.chunk.text}"
         for n, r in enumerate(answer.retrieved, start=1)
@@ -179,6 +189,13 @@ def summarize(rows: list[dict], settings, llm, device: str) -> dict:
             entry["answer_rate"] = mean([0.0 if r["refused"] else 1.0 for r in judged])
             entry["abstention"] = mean(
                 [1.0 if r["refused"] else 0.0 for r in unanswerable if "refused" in r]
+            )
+            # Citation checks only count answers that were given (refusals have no citations).
+            entry["citation_precision"] = mean(
+                [r["citation_precision"] for r in judged if r.get("citation_precision") is not None]
+            )
+            entry["citation_recall"] = mean(
+                [r["citation_recall"] for r in judged if "citation_recall" in r]
             )
         summary[mode] = entry
 
@@ -212,34 +229,45 @@ def summarize(rows: list[dict], settings, llm, device: str) -> dict:
 
 def fmt(value: float | None, pct: bool = False) -> str:
     if value is None:
-        return "TODO"
+        return "not measured"
     return f"{value * 100:.1f}%" if pct else f"{value:.3f}"
 
 
 def to_markdown(result: dict) -> str:
     cfg = result["config"]
+    llm_modes = cfg.get("llm_modes") or []
+    header = "| Retrieval mode | Recall@5 | MRR@10 |"
+    if llm_modes:
+        header += (
+            " Faithfulness | Answer rate | Abstention | Citation precision | Citation recall |"
+        )
+    header += " Retrieval latency |"
     lines = [
         f"Run: {result['generated_at']} · {result['num_questions']} questions "
         f"({result['num_answerable']} answerable) · device `{cfg['device']}` · "
         f"LLM `{cfg['llm'] or 'not run'}`",
         "",
-        "| Retrieval mode | Recall@5 | MRR@10 | Faithfulness | Answer rate | Abstention "
-        "| Retrieval latency |",
-        "|---|---|---|---|---|---|---|",
+        header,
+        "|" + "---|" * (header.count("|") - 1),
     ]
-    llm_modes = cfg.get("llm_modes") or []
     for mode, s in result["summary"].items():
-        if llm_modes and mode not in llm_modes:
-            llm_cells = "— | — | —"  # generation deliberately not run for this mode
-        else:
-            llm_cells = (
-                f"{fmt(s.get('faithfulness'))} | {fmt(s.get('answer_rate'), pct=True)} | "
-                f"{fmt(s.get('abstention'), pct=True)}"
-            )
-        lines.append(
-            f"| {MODE_LABELS[mode]} | {fmt(s['recall@5'])} | {fmt(s['mrr@10'])} | "
-            f"{llm_cells} | {s['retrieval_ms']:.0f} ms |"
-        )
+        row = f"| {MODE_LABELS[mode]} | {fmt(s['recall@5'])} | {fmt(s['mrr@10'])} |"
+        if llm_modes:
+            if mode not in llm_modes:
+                row += " — | — | — | — | — |"  # generation deliberately not run for this mode
+            else:
+                row += (
+                    f" {fmt(s.get('faithfulness'))} | {fmt(s.get('answer_rate'), pct=True)} | "
+                    f"{fmt(s.get('abstention'), pct=True)} | {fmt(s.get('citation_precision'))} | "
+                    f"{fmt(s.get('citation_recall'))} |"
+                )
+        lines.append(row + f" {s['retrieval_ms']:.0f} ms |")
+    if not llm_modes:
+        lines += [
+            "",
+            "Faithfulness, answer rate, abstention and citation precision/recall are not "
+            "measured in this run (no LLM calls). Retrieval metrics are the measured results.",
+        ]
 
     repos = list(result["by_repo"])
     lines += [
